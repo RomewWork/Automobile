@@ -378,7 +378,6 @@ Router.post("/cartnum", async (req, res) => {
 
 // 前台购物车接口
 //获取购物车商品id为xx的数据
-Router.route()
 Router.post("/getcartshopdata", async (req, res) => {
   let {
     id
