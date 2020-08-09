@@ -22,11 +22,11 @@ Router.use(express.urlencoded({
 })); //为了获取req.body里面的数据
 
 //引入子路由模块
-const goodsRouter = require('./skin');
+const goodsRouter = require('./goods');
 const usersRouter = require('./users');
 
 //调用子路由
-Router.use('/skin', goodsRouter); //goods.js模块导出了一个中间件
+Router.use('/goods', goodsRouter); //goods.js模块导出了一个中间件
 Router.use('/users', usersRouter); //goods.js模块导出了一个中间件
 
 //暴露模块

@@ -8,9 +8,9 @@ const {
   mysql: query
 } = require("../db"); //解构并重命名
 
-//查询用户名
+//前台查询用户名
 Router.post("/reg1", async (req, res) => {
-  //查询数据库的数据
+
   let {
     username
   } = req.body;
@@ -22,9 +22,9 @@ Router.post("/reg1", async (req, res) => {
   res.send(data);
 });
 
-//前端注册
+//前台注册
 Router.post("/reg2", async (req, res) => {
-  //查询数据库的数据
+
   let {
     username,
     password
@@ -39,9 +39,9 @@ Router.post("/reg2", async (req, res) => {
   res.send(data);
 });
 
-//前端登陆
+//前台登陆
 Router.post("/login", async (req, res) => {
-  //查询数据库的数据
+
   let {
     username,
     password
@@ -54,9 +54,9 @@ Router.post("/login", async (req, res) => {
   res.send(data);
 });
 
-//前端修改密码
-Router.post("/put", async (req, res) => {
-  //查询数据库的数据
+//前台修改密码
+Router.post("/putpsw", async (req, res) => {
+
   let {
     username,
     password,
@@ -71,9 +71,8 @@ Router.post("/put", async (req, res) => {
 });
 
 //后台获取所有用户信息
-Router.get("/htaiuserdata", async (req, res) => {
+Router.post("/userdata", async (req, res) => {
 
-  //查询数据库的数据
   let sql = "SELECT * FROM user";
 
   let data = await query(sql);
@@ -81,21 +80,24 @@ Router.get("/htaiuserdata", async (req, res) => {
   res.send(data);
 });
 
-//后台获取所有权限信息
-Router.get("/htaiuserdatas", async (req, res) => {
 
-  //查询数据库的数据
-  let sql = "SELECT * FROM htaiuser";
+//后台查询权限用户名
+Router.post("/htaireg1", async (req, res) => {
+
+  let {
+    username
+  } = req.body;
+
+  let sql = `SELECT * FROM htaiuser where username='${username}'`;
 
   let data = await query(sql);
 
   res.send(data);
 });
 
-//后台登陆功能
+//后台必须管理员登陆
 Router.post('/htailogin', async (req, res) => {
 
-  //查询数据库的数据
   let {
     username,
     password
@@ -108,10 +110,9 @@ Router.post('/htailogin', async (req, res) => {
   res.send(data);
 });
 
-// 后台修改密码
+// 后台必须管理员修改密码
 Router.post('/puthtaiuser', async (req, res) => {
 
-  //查询数据库的数据
   let {
     username,
     password,
@@ -125,101 +126,90 @@ Router.post('/puthtaiuser', async (req, res) => {
   res.send(data);
 });
 
-// 后台用户管理
-Router.route("/htaiuser/:id")
+// 后台删除用户管理
+Router.post("/deluser", async (req, res) => {
 
-  //删除id为xx数据
-  .delete(async (req, res) => {
-
-    let {
-      id
-    } = req.params;
-
-    let sql = `DELETE FROM user WHERE uid=${id.split('&')[0]}`;
-
-    let data = await query(sql);
-
-    data.message = "成功"
-
-    res.send(data);
-  })
-
-  //修改
-  .put(async (req, res) => {
-    let {
-      id
-    } = req.params; //url动态路由  /htaiuser/28 修改id=28的数据
-
-    let sql2 = `UPDATE user SET username='${id.split('&')[1]}',password='${id.split('&')[2]}' WHERE uid=${id.split('&')[0]}`;
-
-    let data2 = await query(sql2);
-
-    data2.message = "成功"
-
-    res.send(data2);
-  });
-
-// 后台权限管理
-Router.route("/htaiuserdel/:id")
-  //删除id为xx数据
-  .delete(async (req, res) => {
-    console.log(req.body);
-
-    let {
-      id
-    } = req.params;
-
-    let sql = `DELETE FROM htaiuser WHERE id=${id}`;
-
-    let data = await query(sql);
-
-    data.message = "成功"
-
-    res.send(data);
-  })
-
-Router.route("/htaiuserput")
-  //修改
-  .put(async (req, res) => {
-    let {
-      id,
-      username,
-      password,
-    } = req.body; //url动态路由  /htaiuser/28 修改id=28的数据
-
-    let sql2 = `UPDATE htaiuser SET username='${username}',password='${password}' WHERE uid=${id}`;
-
-    let data2 = await query(sql2);
-
-    data2.message = "成功"
-
-    res.send(data2);
-  });
-
-//查询后端权限用户名
-Router.post("/htaireg1", async (req, res) => {
-  //查询数据库的数据
   let {
-    username
+    id
   } = req.body;
 
-  let sql = `SELECT * FROM htaiuser where username='${username}'`;
+  let sql = `DELETE FROM user WHERE uid=${id}`;
+
+  let data = await query(sql);
+
+  data.message = "成功"
+
+  res.send(data);
+})
+
+//后台修改用户信息
+Router.post("/putuser", async (req, res) => {
+  let {
+    id
+  } = req.params; //url动态路由  /htaiuser/28 修改id=28的数据
+
+  let sql2 = `UPDATE user SET username='${id.split('&')[1]}',password='${id.split('&')[2]}' WHERE uid=${id.split('&')[0]}`;
+
+  let data2 = await query(sql2);
+
+  data2.message = "成功"
+
+  res.send(data2);
+});
+
+// 后台权限管理
+//后台获取所有权限信息
+Router.post("/htaiuserdatas", async (req, res) => {
+
+  let sql = "SELECT * FROM htaiuser";
 
   let data = await query(sql);
 
   res.send(data);
 });
 
-//后端添加权限
-Router.post("/htaireg2", async (req, res) => {
-  //查询数据库的数据
+//删除id为xx权限
+Router.post("/htaiuserdel", async (req, res) => {
+
   let {
+    id
+  } = req.params;
+
+  let sql = `DELETE FROM htaiuser WHERE id=${id}`;
+
+  let data = await query(sql);
+
+  data.message = "成功"
+
+  res.send(data);
+})
+
+//后台修改权限信息
+Router.post("/htaiuserput", async (req, res) => {
+  let {
+    id,
     username,
     password,
-    role
+  } = req.body; //url动态路由  /htaiuser/28 修改id=28的数据
+
+  let sql2 = `UPDATE htaiuser SET username='${username}',password='${password}' WHERE uid=${id}`;
+
+  let data2 = await query(sql2);
+
+  data2.message = "成功"
+
+  res.send(data2);
+});
+
+//后台添加权限
+Router.post("/htaireg2", async (req, res) => {
+
+  let {
+    username,
+    password
   } = req.body;
 
-  let sql = `INSERT INTO htaiuser(username,password,identity) VALUES('${username}','${password}','${role}')`;
+  let sql = `INSERT INTO htaiuser(username,password,identity) VALUES('${username}','${password}','管理员')`;
 
   let data = await query(sql);
 

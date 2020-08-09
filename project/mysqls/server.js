@@ -20,6 +20,6 @@ app.use(allRouter); //引入总的路由，allRouter是一个中间件
 //路由的分配
 
 //监听端口
-app.listen(PORT, () => console.log('服务器已开启，请访问localhost:20086'));
+app.listen(PORT, () => console.log('服务器已开启，请访问localhost:10086'));
 
 // supervisor
