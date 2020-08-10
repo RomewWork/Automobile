@@ -1,6 +1,6 @@
 <template>
   <div class="gome-top">
-    <div id="gome-top-body" class="wbox">
+    <!-- <div id="gome-top-body" class="wbox">
       <ul>
         <li id="gome-entry-link">
           <a data-code="public01001" href="//www.gome.com.cn/" target="_blank">
@@ -33,7 +33,7 @@
           </b>
         </li>
       </ul>
-    </div>
+    </div>-->
   </div>
 </template>
 

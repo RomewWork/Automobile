@@ -37,9 +37,9 @@ Router.post("/listgood", async (req, res) => {
 // 前台列表接口
 // 正常数据
 Router.post("/goodlist", async (req, res) => {
-  let sql2 = "SELECT * FROM listdata";
+  let sql1 = "SELECT * FROM listdata";
 
-  let data2 = await query(sql2); //数组 [{},{},{}] 总条数==数组长度
+  let data1 = await query(sql1); //数组 [{},{},{}] 总条数==数组长度
 
   //查询数据库的数据
   let sql = "";
@@ -56,12 +56,12 @@ Router.post("/goodlist", async (req, res) => {
 
   let data = await query(sql);
 
-  let pages = Math.ceil(data2.length / num);
+  let pages = Math.ceil(data1.length / num);
 
   result = {
     type: 1, //成功，
     mes: "成功",
-    total: data2.length, //总条数
+    total: data1.length, //总条数
     pages, //总页码
     page, //当前页
     num, //每页条数
@@ -80,7 +80,7 @@ Router.post("/goodlist1", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let data2 = [];
+  let data1 = [];
   let result = {};
   let {
     page,
@@ -91,7 +91,7 @@ Router.post("/goodlist1", async (req, res) => {
   let index = (page - 1) * num;
 
   for (let i = index; i < nums; i++) {
-    data2.push(data1[i]);
+    data1.push(data1[i]);
   }
   let pages = Math.ceil(data1.length / num);
   result = {
@@ -108,12 +108,12 @@ Router.post("/goodlist1", async (req, res) => {
 
 // 前台列表接口
 // 价格升序
-Router.post("/goodlist2", async (req, res) => {
+Router.post("/goodlist1", async (req, res) => {
   let sql1 = `SELECT * FROM ${name} ORDER BY price ASC`;
 
   let data1 = await query(sql1);
 
-  let data2 = [];
+  let data1 = [];
 
   let result = {}; //传给客户端的数据  null假  {}真  []真  null假
 
@@ -126,7 +126,7 @@ Router.post("/goodlist2", async (req, res) => {
   let index = (page - 1) * num;
 
   for (let i = index; i < nums; i++) {
-    data2.push(data1[i]);
+    data1.push(data1[i]);
   }
 
   let pages = Math.ceil(data1.length / num);
@@ -138,7 +138,7 @@ Router.post("/goodlist2", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data2, //数据
+    list: data1, //数据
   };
 
   res.send(result);
@@ -151,7 +151,7 @@ Router.post("/goodlist3", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let data2 = [];
+  let data1 = [];
 
   let result = {};
 
@@ -164,7 +164,7 @@ Router.post("/goodlist3", async (req, res) => {
   let index = (page - 1) * num;
 
   for (let i = index; i < nums; i++) {
-    data2.push(data1[i]);
+    data1.push(data1[i]);
   }
 
   let pages = Math.ceil(data1.length / num);
@@ -176,17 +176,17 @@ Router.post("/goodlist3", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data2, //数据
+    list: data1, //数据
   };
 
   res.send(result);
 });
 
-//get请求获取所有是商品数据 : page=1  num=12  列表页数据
+//get请求获取所有是商品数据 : page=1  num=11  列表页数据
 Router.post("/goodlists", async (req, res) => {
   //查全部数据
-  let sql2 = "SELECT * FROM listdata";
-  let data2 = await query(sql2); //数组 [{},{},{}] 总条数==数组长度
+  let sql1 = "SELECT * FROM listdata";
+  let data1 = await query(sql1); //数组 [{},{},{}] 总条数==数组长度
 
   //查询数据库的数据
   let sql = "";
@@ -204,12 +204,12 @@ Router.post("/goodlists", async (req, res) => {
 
   let data = await query(sql);
 
-  let pages = Math.ceil(data2.length / num);
+  let pages = Math.ceil(data1.length / num);
 
   result = {
     type: 1, //成功，
     mes: "成功",
-    total: data2.length, //总条数
+    total: data1.length, //总条数
     pages, //总页码
     page, //当前页
     num, //每页条数
@@ -265,11 +265,12 @@ Router.post("putgoodnum", async (req, res) => {
 });
 
 // 前台加入购物车接口
-// 查询购物车中是否有某个商品
 Router.post("/cartgood", async (req, res) => {
+
   let {
     name,
     id,
+    shopNum,
     token
   } = req.body;
 
@@ -282,9 +283,24 @@ Router.post("/cartgood", async (req, res) => {
   let data = await query(sql);
 
   if (data.length == 0) {
-    res.send((data = []));
+
+    let sql3 = `INSERT INTO cartshop(gid,imgurl,title,price,total,num,salesVolume,evaluate,name,bool,data) VALUES('${
+      data1[0].gid
+    }','${data1[0].imgurl}','${data1[0].title}','${data1[0].price}','${shopNum *
+      data1[0].price}','${shopNum}}','${data1[0].salesVolume}','${
+      data1[0].evaluate
+    }','${token}','${1}','${name}')`;
+
+    let data3 = await query(sql3);
+    res.send(data3)
   } else {
-    res.send(data);
+
+    let sql4 = `UPDATE cartshop SET num=${shopNum},total=${shopNum *
+      data1[0].price} where gid=${id} and name='${name}'`;
+
+    let data4 = await query(sql4);
+
+    res.send(data4)
   }
 });
 
@@ -301,19 +317,19 @@ Router.post("/setcartgood", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let sql2 = `INSERT INTO cartshop(gid,imgurl,title,price,total,num,salesVolume,evaluate,name,bool,data) VALUES('${
+  let sql1 = `INSERT INTO cartshop(gid,imgurl,title,price,total,num,salesVolume,evaluate,name,bool,data) VALUES('${
     data1[0].gid
   }','${data1[0].imgurl}','${data1[0].title}','${data1[0].price}','${shopNum *
     data1[0].price}','${shopNum}}','${data1[0].salesVolume}','${
     data1[0].evaluate
   }','${token}','${1}','${dataName}')`;
 
-  let data = await query(sql2);
+  let data = await query(sql1);
 
   res.send(data);
 });
 
-// 前台加入购物车接口
+// 前台购物车接口
 // 添加购物车商品数量加N
 Router.post("/addcartgoodisnum", async (req, res) => {
   let {
@@ -338,7 +354,7 @@ Router.post("/cartdata", async (req, res) => {
     name
   } = req.body;
 
-  let data2 = [];
+  let data1 = [];
 
   let sql = `SELECT * FROM cartshop ORDER BY uid DESC`;
 
@@ -346,11 +362,11 @@ Router.post("/cartdata", async (req, res) => {
 
   data.forEach((item) => {
     if (item.name == name) {
-      data2.push(item);
+      data1.push(item);
     }
   });
 
-  res.send(data2);
+  res.send(data1);
 });
 
 // 前台购物车接口
@@ -364,16 +380,16 @@ Router.post("/cartnum", async (req, res) => {
 
   let data1 = await query(sql);
 
-  let data2 = [];
+  let data1 = [];
   let nub = 0;
 
   for (let i = 0; i < data1.length; i++) {
     nub = data1[i].num + nub;
   }
 
-  data2.push(nub);
+  data1.push(nub);
 
-  res.send(data2);
+  res.send(data1);
 });
 
 // 前台购物车接口
@@ -417,12 +433,12 @@ Router.post("/putcartshopdata", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let sql2 = `UPDATE cartshop SET num=${num},total=${num *
+  let sql1 = `UPDATE cartshop SET num=${num},total=${num *
       data1[0].price} WHERE uid=${id}`;
 
-  let data2 = await query(sql2);
+  let data1 = await query(sql1);
 
-  res.send(data2);
+  res.send(data1);
 });
 
 // 前台购物车接口
@@ -431,7 +447,7 @@ Router.post("/cartbool", async (req, res) => {
   let {
     id,
     bool
-  } = req.body; //url动态路由  /goods/28 修改id=28的数据
+  } = req.body; //url动态路由  /goods/18 修改id=18的数据
 
   let sql = `UPDATE cartshop SET bool=${bool} WHERE uid=${id}`;
 
@@ -446,7 +462,7 @@ Router.post("/cartboolall", async (req, res) => {
   let {
     token,
     id
-  } = req.body; //url动态路由  /goods/28 修改id=28的数据
+  } = req.body; //url动态路由  /goods/18 修改id=18的数据
 
   let sql = `UPDATE cartshop SET bool=${Number(id)} WHERE name=${token}`;
 
@@ -525,7 +541,7 @@ Router.post("/pushdata", async (req, res) => {
     price
   } = req.body;
 
-  let sql = `INSERT INTO listdata(imgurl,title,price,text1,text2,ranking,excellent,good) VALUES('${imgurl}','${title}','${price}','暂无评价','','','','')`;
+  let sql = `INSERT INTO listdata(imgurl,title,price,text1,text1,ranking,excellent,good) VALUES('${imgurl}','${title}','${price}','暂无评价','','','','')`;
 
   let data = await query(sql);
 
