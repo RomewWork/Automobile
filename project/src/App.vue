@@ -10,4 +10,5 @@ export default {};
 
 
 <style lang="scss" scoped>
+// !important
 </style>
