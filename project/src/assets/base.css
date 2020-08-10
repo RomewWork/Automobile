@@ -64,6 +64,8 @@ table {
 
 a {
     text-decoration: none;
+    color: #5e5e5e;
+    cursor: pointer;
 }
 
 * {
@@ -73,17 +75,19 @@ a {
 }
 
 /*2.添加公共样式*/
-/*body {
-    font:12px Arial,Verdana,"\5b8b\4f53";
-    color:#666;
-    background:#fff;
-}*/
+body {
+    font: 12px Arial, Verdana, "\5b8b\4f53";
+    color: #5e5e5e;
+}
+
 /*清除浮动（不管）*/
 .clearfix:before,
 .clearfix:after {
     /*清楚浮动*/
     content: "";
-    display: table;
+    visibility: hidden;
+    display: block;
+    height: 0;
 }
 
 .clearfix:after {
