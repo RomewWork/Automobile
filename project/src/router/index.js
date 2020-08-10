@@ -5,11 +5,6 @@ import NotFound from "../views/404";
 Vue.use(VueRouter);
 
 const routes = [{
-    <<
-    <<
-    << < HEAD <<
-    <<
-    << < HEAD
     path: '/home',
     name: 'home',
     component: () => import('../views/Home.vue')
@@ -18,26 +13,6 @@ const routes = [{
     redirect: '/home'
   },
   {
-    path: "/list",
-    name: "list",
-    component: () => import('../components/List/List.vue')
-  },
-  {
-    path: "/404",
-    component: NotFound
-  },
-  {
-    path: "*",
-    component: NotFound
-  } ===
-  ===
-  = ===
-  ===
-  = >>>
-  >>>
-  > bc533d89d137bb4be9a24e00c3aae1f8d3d437ea
-
-  , {
     path: '/home',
     name: 'home',
     component: () => import('../views/Home.vue')
@@ -50,18 +25,22 @@ const routes = [{
     path: '/login',
     name: 'login',
     component: () => import('../views/Login.vue')
-  }, {
+  },
+  {
+    path: "/list",
+    name: "list",
+    component: () => import('../components/List/List.vue')
+  },
+  {
     path: '/',
     redirect: '/home'
-  } <<
-  <<
-  << < HEAD >>>
-  >>>
-  > bc533d89d137bb4be9a24e00c3aae1f8d3d437ea ===
-  ===
-  = >>>
-  >>>
-  > bc533d89d137bb4be9a24e00c3aae1f8d3d437ea
+  }, {
+    path: "/404",
+    component: NotFound
+  }, {
+    path: "*",
+    component: NotFound
+  },
 ]
 
 const router = new VueRouter({
