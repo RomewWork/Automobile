@@ -80,7 +80,7 @@ Router.post("/goodlist1", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let data1 = [];
+  let data2 = [];
   let result = {};
   let {
     page,
@@ -91,7 +91,7 @@ Router.post("/goodlist1", async (req, res) => {
   let index = (page - 1) * num;
 
   for (let i = index; i < nums; i++) {
-    data1.push(data1[i]);
+    data2.push(data1[i]);
   }
   let pages = Math.ceil(data1.length / num);
   result = {
@@ -101,7 +101,7 @@ Router.post("/goodlist1", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data1, //数据
+    list: data2, //数据
   };
   res.send(result);
 });
@@ -113,7 +113,7 @@ Router.post("/goodlist1", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let data1 = [];
+  let data2 = [];
 
   let result = {}; //传给客户端的数据  null假  {}真  []真  null假
 
@@ -126,7 +126,7 @@ Router.post("/goodlist1", async (req, res) => {
   let index = (page - 1) * num;
 
   for (let i = index; i < nums; i++) {
-    data1.push(data1[i]);
+    data2.push(data1[i]);
   }
 
   let pages = Math.ceil(data1.length / num);
@@ -138,7 +138,7 @@ Router.post("/goodlist1", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data1, //数据
+    list: data2, //数据
   };
 
   res.send(result);
@@ -151,7 +151,7 @@ Router.post("/goodlist3", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let data1 = [];
+  let data2 = [];
 
   let result = {};
 
@@ -164,7 +164,7 @@ Router.post("/goodlist3", async (req, res) => {
   let index = (page - 1) * num;
 
   for (let i = index; i < nums; i++) {
-    data1.push(data1[i]);
+    data2.push(data1[i]);
   }
 
   let pages = Math.ceil(data1.length / num);
@@ -176,7 +176,7 @@ Router.post("/goodlist3", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data1, //数据
+    list: data2, //数据
   };
 
   res.send(result);
@@ -317,14 +317,14 @@ Router.post("/setcartgood", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let sql1 = `INSERT INTO cartshop(gid,imgurl,title,price,total,num,salesVolume,evaluate,name,bool,data) VALUES('${
+  let sql2 = `INSERT INTO cartshop(gid,imgurl,title,price,total,num,salesVolume,evaluate,name,bool,data) VALUES('${
     data1[0].gid
   }','${data1[0].imgurl}','${data1[0].title}','${data1[0].price}','${shopNum *
     data1[0].price}','${shopNum}}','${data1[0].salesVolume}','${
     data1[0].evaluate
   }','${token}','${1}','${dataName}')`;
 
-  let data = await query(sql1);
+  let data = await query(sql2);
 
   res.send(data);
 });
@@ -380,16 +380,16 @@ Router.post("/cartnum", async (req, res) => {
 
   let data1 = await query(sql);
 
-  let data1 = [];
+  let data2 = [];
   let nub = 0;
 
   for (let i = 0; i < data1.length; i++) {
     nub = data1[i].num + nub;
   }
 
-  data1.push(nub);
+  data2.push(nub);
 
-  res.send(data1);
+  res.send(data2);
 });
 
 // 前台购物车接口
@@ -433,12 +433,12 @@ Router.post("/putcartshopdata", async (req, res) => {
 
   let data1 = await query(sql1);
 
-  let sql1 = `UPDATE cartshop SET num=${num},total=${num *
+  let sql2 = `UPDATE cartshop SET num=${num},total=${num *
       data1[0].price} WHERE uid=${id}`;
 
-  let data1 = await query(sql1);
+  let data2 = await query(sql2);
 
-  res.send(data1);
+  res.send(data2);
 });
 
 // 前台购物车接口
