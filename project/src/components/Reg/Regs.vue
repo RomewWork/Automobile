@@ -11,7 +11,6 @@
             <div class="login-wrap">
               <div class="normalLogin">
                 <div class="login-item login-item-name" id="loginNameDiv">
-                  <a href="javascript:;" class="clear-btn"></a>
                   <input
                     name="loginName"
                     id="loginName"
@@ -19,25 +18,26 @@
                     type="text"
                     class="txt txt-focus"
                     placeholder="请输入用户名"
+                    v-model="username"
                   />
                 </div>
                 <div class="login-item login-item-pwd" id="loginPasswordDiv">
-                  <a href="javascript:;" class="clear-btn"></a>
                   <input
                     id="loginPassword"
                     type="password"
                     class="txt txt-focus"
                     autocomplete="off"
                     placeholder="请输入密码"
+                    v-model="password"
                   />
                 </div>
-                <!-- <a
-                  href="###"
+                <a
+                  @click="open"
                   class="wji"
                   style="color: #000;font-size: 13px;cursor: pointer;float: right;"
-                  title="修改密码"
-                >修改密码</a>-->
-                <input type="button" value="注 册" class="btnnuw" />
+                  title="已有账号？去登陆！"
+                >已有账号？去登陆！</a>
+                <input type="button" value="注 册" class="btnnuw" @click="reg" />
               </div>
             </div>
           </div>
@@ -48,7 +48,139 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      uoks: false,
+      poks: false,
+    };
+  },
+  methods: {
+    open() {
+      // 做出pc端有点小刷新，跳转的感觉
+      let { href } = this.$router.resolve({
+        path: "/login",
+      });
+      window.open(href, "_self");
+      location.reload();
+    },
+    reg() {
+      let admin = /^[a-zA-Z0-9_-]{4,16}$/;
+      let psw = /^[a-zA-Z0-9]{4,10}$/;
+
+      let obj = {
+        username: this.username,
+        password: this.password,
+      };
+
+      //未输入用户名
+      if (!this.username) {
+        this.$message({
+          showClose: true,
+          message: "您输入的用户名不能为空哦",
+          type: "error",
+        });
+        return;
+      }
+
+      //未输入密码
+      if (!this.password) {
+        this.$message({
+          showClose: true,
+          message: "您输入的密码不能为空哦",
+          type: "warning",
+        });
+        return;
+      }
+
+      // 用户名密码一致
+      if (this.username === this.password) {
+        this.$message({
+          showClose: true,
+          message: "您输入的用户名密码不能一毛一样哦",
+          type: "warning",
+        });
+        return;
+      }
+
+      //用户名不合法或用户已经被注册
+      if (!admin.test(this.username)) {
+        this.$message({
+          showClose: true,
+          message: "您输入的用户名格式不对哦",
+          type: "error",
+        });
+      } else {
+        this.$post("users/reg1", obj).then((res) => {
+          if (res.length) {
+            this.$message({
+              showClose: true,
+              message: "您输入的用户名太受欢迎了，换一个吧",
+              type: "error",
+            });
+
+            this.uoks = false;
+          } else {
+            this.uoks = true;
+
+            //密码不合法
+            if (!psw.test(this.password)) {
+              this.$message({
+                showClose: true,
+                message: "您输入的密码格式不对哦",
+                type: "error",
+              });
+
+              this.poks = false;
+            } else {
+              this.poks = true;
+
+              if (this.uoks && this.poks) {
+                this.$post("users/reg2", obj).then((res) => {
+                  console.log(res);
+                  if (res.changedRows == 1) {
+                    this.$message({
+                      showClose: true,
+                      message: "您输入的用户已经被注册了，快换一个吧",
+                      type: "error",
+                    });
+                  } else {
+                    this.username = "";
+                    this.password = "";
+
+                    this.$confirm("注册成功，是否马上登陆", {
+                      confirmButtonText: "确定",
+                      cancelButtonText: "取消",
+                      closeOnClickModal: false,
+                    }).then(() => {
+                      // this.$router.push("/login");
+
+                      // 做出pc端有点小刷新，跳转的感觉
+                      let { href } = this.$router.resolve({
+                        path: "/login",
+                      });
+
+                      window.open(href, "_self");
+                      location.reload();
+                    });
+                  }
+                });
+              } else {
+                this.$message({
+                  showClose: true,
+                  message: "您的用户名或密码不符合要求，请检查",
+                  type: "error",
+                });
+              }
+            }
+          }
+        });
+      }
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -67,7 +199,7 @@ export default {};
     .login-box-wrap {
       width: 350px;
       float: right;
-      margin-top: 24px;
+      margin-top: 65px;
       margin-right: 105px;
       position: relative;
       background: #fff;

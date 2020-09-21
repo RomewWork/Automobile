@@ -11,33 +11,34 @@
             <div class="login-wrap">
               <div class="normalLogin">
                 <div class="login-item login-item-name" id="loginNameDiv">
-                  <a href="javascript:;" class="clear-btn"></a>
                   <input
-                    name="loginName"
                     id="loginName"
-                    tabindex="1"
                     type="text"
                     class="txt txt-focus"
                     placeholder="请输入用户名"
+                    v-model="username"
                   />
                 </div>
                 <div class="login-item login-item-pwd" id="loginPasswordDiv">
-                  <a href="javascript:;" class="clear-btn"></a>
                   <input
-                    id="loginPassword"
                     type="password"
                     class="txt txt-focus"
                     autocomplete="off"
                     placeholder="请输入密码"
+                    v-model="password"
                   />
                 </div>
                 <a
-                  href="###"
                   class="wji"
-                  style="color: #000;font-size: 13px;cursor: pointer;float: right;"
+                  style="color: #000;font-size: 13px;cursor: pointer;float: left;"
                   title="修改密码"
                 >修改密码</a>
-                <input type="button" value="登 录" class="btnnuw" />
+                <a
+                  class="wji"
+                  style="color: #000;font-size: 13px;cursor: pointer;float: right;"
+                  title="没有注册？立即去注册"
+                >没有注册？立即去注册</a>
+                <input type="button" value="登 录" class="btnnuw" @click="login()" />
               </div>
             </div>
           </div>
@@ -49,7 +50,71 @@
 
 <script>
 export default {
-  components: {},
+  data() {
+    return {
+      username: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      let token = localStorage.getItem("user");
+      let obj = {
+        username: this.username,
+        password: this.password,
+      };
+      if (token) {
+        this.$confirm("你已经登陆过了，欢迎来到汽车用品商城", {
+          confirmButtonText: "确定",
+          closeOnClickModal: false,
+        }).then(() => {
+          // 做出pc端有点小刷新，跳转的感觉
+          let { href } = this.$router.resolve({
+            path: "/home",
+          });
+
+          window.open(href, "_self");
+        });
+      } else {
+        if (this.username == "" || this.password == "") {
+          this.$message({
+            showClose: true,
+            message: "用户名或密码不能为空哦",
+            type: "error",
+          });
+        } else {
+          this.$post("users/login", obj).then((res) => {
+            if (res.length == 0) {
+              //为零密码错误
+              this.$message({
+                showClose: true,
+                message: "该用户未注册或密码错误，请检查后再试",
+                type: "error",
+              });
+            } else {
+              // 将用户token保存
+              localStorage.setItem("user", this.username);
+
+              this.username = "";
+              this.password = "";
+
+              this.$alert("登陆成功，欢迎来到汽车用品商城", {
+                confirmButtonText: "确定",
+                callback: () => {
+                  let { href } = this.$router.resolve({
+                    path: "/home",
+                  });
+
+                  window.open(href, "_self");
+                  location.reload();
+                },
+              });
+            }
+          });
+        }
+      }
+    },
+  },
 };
 </script>
 
@@ -69,7 +134,7 @@ export default {
     .login-box-wrap {
       width: 350px;
       float: right;
-      margin-top: 24px;
+      margin-top: 65px;
       margin-right: 105px;
       position: relative;
       background: #fff;

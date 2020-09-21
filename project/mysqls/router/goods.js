@@ -197,19 +197,25 @@ Router.post("/goodlist", async (req, res) => {
   let data1 = await query(sql1); //数组 [{},{},{}] 总条数==数组长度
 
   //查询数据库的数据
-  let sql = "";
   let result = {};
   let {
-    name,
     page,
-    num
+    num,
+    nums,
+    classname
   } = req.body; //{page:1,num:5} 查询第一页5条数据
+
+
+  // let sql = `SELECT * FROM ${name} limit ${index},${num}`;
+  let sql = `SELECT * FROM listdata where classification='${classname}'`;
+
+  let data = await query(sql);
 
   let index = (page - 1) * num;
 
-  sql = `SELECT * FROM ${name} limit ${index},${num}`;
-
-  let data = await query(sql);
+  for (let i = index; i < nums; i++) {
+    data2.push(data[i]);
+  }
 
   let pages = Math.ceil(data1.length / num);
 
@@ -220,7 +226,7 @@ Router.post("/goodlist", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data, //数据
+    list: data2, //数据
   };
 
   res.send(result);
@@ -231,7 +237,9 @@ Router.post("/goodlist", async (req, res) => {
 Router.post("/goodlist1", async (req, res) => {
   // res.Header('Content-Type', 'text/html; charset=utf-8');
   //查询数据库的数据
-  let sql1 = `SELECT * FROM ${name} where types='上新'`;
+  let sql1 = `
+    SELECT * FROM listdata where classification = '${classname}'
+    `;
 
   let data1 = await query(sql1);
 
@@ -264,7 +272,11 @@ Router.post("/goodlist1", async (req, res) => {
 // 前台列表接口
 // 价格升序
 Router.post("/goodlist1", async (req, res) => {
-  let sql1 = `SELECT * FROM ${name} ORDER BY price ASC`;
+  let sql1 = `
+    SELECT * FROM $ {
+      name
+    }
+    ORDER BY price ASC `;
 
   let data1 = await query(sql1);
 
@@ -302,7 +314,11 @@ Router.post("/goodlist1", async (req, res) => {
 // 前台列表接口
 // 价格降序
 Router.post("/goodlist3", async (req, res) => {
-  let sql1 = `SELECT * FROM ${name} ORDER BY price DESC`;
+  let sql1 = `
+    SELECT * FROM $ {
+      name
+    }
+    ORDER BY price DESC `;
 
   let data1 = await query(sql1);
 
@@ -355,7 +371,16 @@ Router.post("/goodlists", async (req, res) => {
 
   let index = (page - 1) * num;
 
-  sql = `SELECT * FROM ${name} limit ${index},${num}`;
+  sql = `
+    SELECT * FROM $ {
+      name
+    }
+    limit $ {
+      index
+    }, $ {
+      num
+    }
+    `;
 
   let data = await query(sql);
 
@@ -382,7 +407,14 @@ Router.post("/getgood", async (req, res) => {
     id
   } = req.body;
 
-  let sql = `SELECT * FROM ${name} where gid=${id}`;
+  let sql = `
+    SELECT * FROM $ {
+      name
+    }
+    where gid = $ {
+      id
+    }
+    `;
 
   let data = await query(sql);
 
@@ -396,7 +428,14 @@ Router.post("delgood", async (req, res) => {
     id
   } = req.body;
 
-  let sql = `DELETE FROM ${name} WHERE uid=${id}`;
+  let sql = `
+    DELETE FROM $ {
+      name
+    }
+    WHERE uid = $ {
+      id
+    }
+    `;
 
   let data = await query(sql);
 
@@ -412,7 +451,15 @@ Router.post("putgoodnum", async (req, res) => {
     id
   } = req.body;
 
-  let sql = `UPDATE ${name} SET num=${num} WHERE uid='${id}'`;
+  let sql = `
+    UPDATE $ {
+      name
+    }
+    SET num = $ {
+      num
+    }
+    WHERE uid = '${id}'
+    `;
 
   let data = await query(sql);
 
@@ -429,22 +476,73 @@ Router.post("/cartgood", async (req, res) => {
     token
   } = req.body;
 
-  let sql1 = `SELECT * FROM ${name} where gid=${id}`;
+  let sql1 = `
+    SELECT * FROM $ {
+      name
+    }
+    where gid = $ {
+      id
+    }
+    `;
 
   let data1 = await query(sql1);
 
-  let sql = `SELECT * FROM cartshop WHERE title='${data1[0].title}' and name='${token}'`;
+  let sql = `
+    SELECT * FROM cartshop WHERE title = '${data1[0].title}'
+    and name = '${token}'
+    `;
 
   let data = await query(sql);
 
   if (data.length == 0) {
 
-    let sql3 = `INSERT INTO cartshop(gid,imgurl,title,price,total,num,salesVolume,evaluate,name,bool,data) VALUES('${
+    let sql3 = `
+    INSERT INTO cartshop(gid, imgurl, title, price, total, num, salesVolume, evaluate, name, bool, data) VALUES('${
       data1[0].gid
-    }','${data1[0].imgurl}','${data1[0].title}','${data1[0].price}','${shopNum *
-      data1[0].price}','${shopNum}}','${data1[0].salesVolume}','${
-      data1[0].evaluate
-    }','${token}','${1}','${name}')`;
+    }
+    ','
+    $ {
+      data1[0].imgurl
+    }
+    ','
+    $ {
+      data1[0].title
+    }
+    ','
+    $ {
+      data1[0].price
+    }
+    ','
+    $ {
+      shopNum *
+        data1[0].price
+    }
+    ','
+    $ {
+      shopNum
+    }
+  }
+  ','
+  $ {
+    data1[0].salesVolume
+  }
+  ','
+  $ {
+    data1[0].evaluate
+  }
+  ','
+  $ {
+    token
+  }
+  ','
+  $ {
+    1
+  }
+  ','
+  $ {
+    name
+  }
+  ')`;
 
     let data3 = await query(sql3);
     res.send(data3)

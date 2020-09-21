@@ -1,17 +1,31 @@
 <template>
-<div>
+  <div>
     <div style="width=1200px">
       <div id="filter-box" :class="{'onfixed' : isFixed}">
         <div class="filter-top clearfix">
           <ul class="filter-order-box">
-            <li v-for="(item,index) in atabList " :key="index" :class="{'cur':currentSort==index}" @click="addcur(index)">
+            <li
+              v-for="(item,index) in atabList "
+              :key="index"
+              :class="{'cur':currentSort==index}"
+              @click="addcur(index)"
+            >
               <a>{{ item.title }}</a>
             </li>
             <!-- <li class="price-down">
             <a href="###">价格</a>
             <i class="icon-up-down"></i>
-          </li> -->
+            </li>-->
           </ul>
+          <div class="block">
+            <el-pagination
+              current-page.sync="1"
+              :page-size="10"
+              layout="prev, pager, next, jumper"
+              :total="100"
+              @current-change="changeNum"
+            ></el-pagination>
+          </div>
         </div>
       </div>
     </div>
@@ -21,7 +35,7 @@
           <div class="item-tab">
             <p class="item-pic">
               <a>
-                <img src="../../assets/jiaquan.webp" alt="">
+                <img src="../../assets/jiaquan.webp" alt />
               </a>
             </p>
             <div>
@@ -58,8 +72,8 @@
           </div>
         </li>
       </ul>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -71,22 +85,23 @@ export default {
       offsetTop: 0,
       // cur样式初始索引
       currentSort: 0,
+      num: 1,
       atabList: [
         {
-          title: "综合"
+          title: "综合",
         },
         {
-          title: "销量"
+          title: "销量",
         },
         {
-          title: "新品"
+          title: "新品",
         },
         {
-          title: "评价"
+          title: "评价",
         },
         {
-          title: "价格"
-        }
+          title: "价格",
+        },
       ],
       ashopList: [
         {
@@ -95,7 +110,7 @@ export default {
           shopprice: 13,
           shopname:
             "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12
+          shopcomment: 12,
         },
         {
           id: 2,
@@ -103,7 +118,7 @@ export default {
           shopprice: 12,
           shopname:
             "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12
+          shopcomment: 12,
         },
         {
           id: 3,
@@ -111,7 +126,7 @@ export default {
           shopprice: 12,
           shopname:
             "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12
+          shopcomment: 12,
         },
         {
           id: 4,
@@ -119,7 +134,7 @@ export default {
           shopprice: 12,
           shopname:
             "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12
+          shopcomment: 12,
         },
         {
           id: 5,
@@ -127,7 +142,7 @@ export default {
           shopprice: 12,
           shopname:
             "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12
+          shopcomment: 12,
         },
         {
           id: 6,
@@ -135,9 +150,9 @@ export default {
           shopprice: 12,
           shopname:
             "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12
-        }
-      ]
+          shopcomment: 12,
+        },
+      ],
     };
   },
   mounted() {
@@ -159,16 +174,22 @@ export default {
         document.body.scrollTop;
       // 如果被卷曲的高度大于吸顶元素到顶端位置 的距离
       this.isFixed = scrollTop > this.offsetTop ? true : false;
-    }
+    },
+    changeNum(val) {
+      console.log(val);
+    },
   },
   //回调中移除监听
-  destroyed() {
+  beforeDestroy() {
     window.removeEventListener("scroll", this.handleScroll);
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
+.block {
+  padding-left: 600px;
+}
 .onfixed {
   position: fixed;
   top: 0;
@@ -188,6 +209,7 @@ export default {
     border: 1px solid #ccc;
     background: #fff;
     box-sizing: content-box;
+    margin-top: 3px;
 
     li {
       float: left;
