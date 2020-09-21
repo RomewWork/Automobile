@@ -24,7 +24,12 @@ const routes = [{
   {
     path: "/list",
     name: "list",
-    component: () => import('../components/List/List.vue')
+    component: () => import('../views/List.vue')
+  },
+  {
+    path: "/detail",
+    name: "detail",
+    component: () => import('../views/Detail.vue')
   },
   {
     path: "/collection",
