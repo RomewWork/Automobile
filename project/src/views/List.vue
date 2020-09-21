@@ -1,17 +1,14 @@
 <template>
   <div class="nSearchWarp">
-    <Listfixed/>
-    <Listproduct/>
+    <Lists/>
   </div>
 </template>
 
 <script>
-import Listfixed from "../components/List/List-fixed";
-import Listproduct from "../components/List/List-product";
+import Lists from "../components/List/Lists";
 export default {
   components: {
-    Listfixed,
-    Listproduct
+    Lists
   }
 };
 </script>

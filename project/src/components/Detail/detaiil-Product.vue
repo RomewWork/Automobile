@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container clearfix">
     <div class="prd-left fl"></div>
     <div class="prd-right fl">
       <div class="hgroup">
@@ -120,12 +120,6 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-.container {
-  width: 1200px;
-  margin: 0 auto;
-  color: #5e5e5e;
-  font: 12px/12px arial, Microsoft YaHei;
-}
 .prd-right {
   width: 620px;
   margin: 0 0 0 30px;
