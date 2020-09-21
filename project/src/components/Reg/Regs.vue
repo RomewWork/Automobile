@@ -48,12 +48,7 @@
 </template>
 
 <script>
-export default {
-  components: {},
-  data() {
-    return {};
-  },
-};
+export default {};
 </script>
 
 <style lang="scss" scoped>

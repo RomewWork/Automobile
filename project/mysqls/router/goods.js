@@ -15,19 +15,174 @@ const {
   mysql: query
 } = require("../db"); //解构并重命名
 
-// //get请求获取所有是商品数据 首页数据
-// Router.post("/goodhome", async (req, res) => {
-//   //查询数据库的数据
-//   let sql = "SELECT * FROM homedata";
-
-//   let data = await query(sql);
-
-//   res.send(data);
-// });
-
-Router.post("/listgood", async (req, res) => {
+//首页数据
+Router.post("/goodHome", async (req, res) => {
   //查询数据库的数据
-  let sql = `SELECT * FROM ${name}`;
+  let sql = "SELECT * FROM listdata";
+
+  let data = await query(sql);
+  let data1 = data.filter(item => item.classification == "行车记录仪");
+  let data2 = data.filter(item => item.classification == "车载生活电");
+  let data3 = data.filter(item => item.classification == "电源");
+  let data4 = data.filter(item => item.classification == "吸尘器");
+  let data5 = data.filter(item => item.classification == "净化器");
+  let data6 = data.filter(item => item.classification == "改装配件");
+  let data7 = data.filter(item => item.classification == "轮胎");
+  let data8 = data.filter(item => item.classification == "玻璃水");
+  let data9 = data.filter(item => item.classification == "车蜡");
+  let data10 = data.filter(item => item.classification == "清洁剂");
+  let data11 = data.filter(item => item.classification == "洗车机");
+  let data12 = data.filter(item => item.classification == "洗车配件");
+  let data13 = data.filter(item => item.classification == "安全座椅");
+  let data14 = data.filter(item => item.classification == "打气泵");
+  let data15 = data.filter(item => item.classification == "防盗设备");
+  let data16 = data.filter(item => item.classification == "紧急救援");
+  let data17 = data.filter(item => item.classification == "自驾装备");
+  let data18 = data.filter(item => item.classification == "功能精品");
+  let data19 = data.filter(item => item.classification == "挂失摆件");
+  let data20 = data.filter(item => item.classification == "颈枕腰靠");
+  let data21 = data.filter(item => item.classification == "内饰精品");
+  let data22 = data.filter(item => item.classification == "四季垫");
+  data1.length = 6;
+  data2.length = 6;
+  data3.length = 6;
+  data4.length = 6;
+  data5.length = 6;
+  data6.length = 6;
+  data7.length = 6;
+  data8.length = 6;
+  data9.length = 6;
+  data10.length = 6;
+  data11.length = 6;
+  data12.length = 6;
+  data13.length = 6;
+  data14.length = 6;
+  data15.length = 6;
+  data16.length = 6;
+  data17.length = 6;
+  data18.length = 6;
+  data19.length = 6;
+  data20.length = 6;
+  data21.length = 6;
+  data22.length = 6;
+  let arr = [{
+      title: "车载电器",
+      minImg: "http://gfs12.gomein.net.cn/T13DWjBQhT1RCvBVdK.jpg",
+      maxImg: "http://gfs11.gomein.net.cn/T1WxLjBgLT1RCvBVdK.jpg",
+      tab: [{
+          id: 1,
+          text: '行车记录仪'
+        }, {
+          id: 2,
+          text: '车载生活电'
+        },
+        {
+          id: 3,
+          text: '电源'
+        }, {
+          id: 4,
+          text: '吸尘器'
+        }, {
+          id: 5,
+          text: '净化器'
+        }
+      ],
+      list: [data1, data2, data3, data4, data5]
+    },
+    {
+      title: "养护配件",
+      minImg: "http://gfs10.gomein.net.cn/T1evKTBCVj1RCvBVdK.jpeg",
+      maxImg: "http://gfs13.gomein.net.cn/T1QtYXBjxT1RCvBVdK.jpg",
+      tab: [{
+        id: 6,
+        text: '改装配件'
+      }, {
+        id: 7,
+        text: '轮胎'
+      }],
+      list: [data6, data7]
+    },
+    {
+      title: "美容清洁",
+      minImg: "http://gfs11.gomein.net.cn/T1pAKbBmZT1RCvBVdK.jpg",
+      maxImg: "http://gfs11.gomein.net.cn/T1FzbbByJv1RCvBVdK.jpg",
+      tab: [{
+          id: 8,
+          text: '玻璃水'
+        }, {
+          id: 9,
+          text: '车蜡'
+        },
+        {
+          id: 10,
+          text: '清洁剂'
+        }, {
+          id: 11,
+          text: '洗车机'
+        }, {
+          id: 12,
+          text: '洗车配件'
+        }
+      ],
+      list: [data8, data9, data10, data11, data12]
+    },
+    {
+      title: "安全自驾",
+      minImg: "http://gfs10.gomein.net.cn/T1vxLjBQYv1RCvBVdK.jpg",
+      maxImg: "http://gfs11.gomein.net.cn/T1pahjBQLT1RCvBVdK.jpg",
+      tab: [{
+          id: 13,
+          text: '安全座椅'
+        }, {
+          id: 14,
+          text: '打气泵'
+        },
+        {
+          id: 15,
+          text: '防盗设备'
+        }, {
+          id: 16,
+          text: '紧急救援'
+        }, {
+          id: 17,
+          text: '自驾装备'
+        }
+      ],
+      list: [data13, data14, data15, data16, data17]
+    },
+    {
+      title: "内饰精品",
+      minImg: "http://gfs14.gomein.net.cn/T1SThTBKbT1RCvBVdK.jpeg",
+      maxImg: "http://gfs12.gomein.net.cn/T1bfAbByEv1RCvBVdK.jpg",
+      tab: [{
+          id: 18,
+          text: '功能精品'
+        }, {
+          id: 19,
+          text: '挂失摆件'
+        },
+        {
+          id: 20,
+          text: '颈枕腰靠'
+        }, {
+          id: 21,
+          text: '内饰精品'
+        }, {
+          id: 22,
+          text: '四季垫'
+        }
+      ],
+      list: [data18, data19, data20, data21, data22]
+    }
+  ];
+
+  res.send(arr);
+});
+
+// 列表全部数据
+Router.post("/listGood", async (req, res) => {
+  //查询数据库的数据
+  let sql = `SELECT * FROM listdata`;
 
   let data = await query(sql);
 

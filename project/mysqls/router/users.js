@@ -76,7 +76,6 @@ Router.post("/userdata", async (req, res) => {
   let sql = "SELECT * FROM user";
 
   let data = await query(sql);
-
   res.send(data);
 });
 

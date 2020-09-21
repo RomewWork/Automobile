@@ -1,180 +1,355 @@
 <template>
-  <div class="wbox lazy-fn-wrap">
-    <div class="wbox floor floor-current">
-      <h2 class="car_title">车载电器</h2>
-      <div class="floor_main">
-        <div class="main_tab">
-          <ul>
-            <li class="cur">
-              <span>行车记录仪</span>
-              <i></i>
-            </li>
-            <li class>
-              <span>导航仪</span>
-              <i></i>
-            </li>
-            <li>
-              <span>电子狗</span>
-              <i></i>
-            </li>
-            <li>
-              <span>净化器</span>
-              <i></i>
-            </li>
-            <li>
-              <span>冷暖箱</span>
-              <i></i>
-            </li>
-          </ul>
-          <div class="floor_tab_img">
-            <a href="https://mall.gome.com.cn/80008643/" target="_blank">
-              <img
-                class="lazyloading edit-mode"
-                src="//gfs12.gomein.net.cn/T13DWjBQhT1RCvBVdK.jpg"
-                alt="广告小图_0"
-                width="190"
-                height="250"
-              />
-            </a>
-          </div>
-        </div>
-        <div class="content">
-          <div class="main_content edit-mode">
-            <div class="floor_img">
-              <a href="//mall.gome.com.cn/80011553/" target="_blank">
+  <div>
+    <div class="wbox lazy-fn-wrap">
+      <div class="wbox floor floor-current">
+        <h2 class="car_title">{{list[0].title}}</h2>
+        <div class="floor_main">
+          <div class="main_tab">
+            <ul>
+              <li
+                v-for="(item,index) in list[0].tab"
+                :key="item.id"
+                @click="conIndex1 = index"
+                :class="{cur : conIndex1 == index}"
+              >
+                <span>{{item.text}}</span>
+                <i></i>
+              </li>
+            </ul>
+            <div class="floor_tab_img">
+              <a>
                 <img
-                  class="lazyloading"
-                  src="//gfs11.gomein.net.cn/T1WxLjBgLT1RCvBVdK.jpg"
-                  alt="广告_0"
-                  width="380"
-                  height="540"
+                  class="lazyloading edit-mode"
+                  :src="list[0].minImg"
+                  alt="广告小图_0"
+                  width="190"
+                  height="250"
                 />
               </a>
             </div>
-            <div class="floor_goods">
-              <ul>
-                <li>
-                  <a
-                    href="//item.gome.com.cn/A0006469781-pop8012002175.html"
-                    title="金字號H7行车记录仪(标配 双镜头)"
-                    target="_blank"
-                  >
-                    <img
-                      class="lazyloading"
-                      src="//gfs17.gomein.net.cn/T1bOCbB4Wv1RCvBVdK_160.jpg"
-                      title="金字號H7行车记录仪(标配 双镜头)"
-                      width="160"
-                      height="160"
-                    />
-                    <p class="img_name">金字號H7行车记录仪(标配 双镜头)</p>
-                    <div class="hot_price">
-                      <span>¥</span>
-                      <i class="minPrice">0.00</i>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="//item.gome.com.cn/A0006351368-pop8010724451.html"
-                    title="磐鼎 P606 汽车载新款隐藏式行车记录仪 锌合金3寸屏单双镜头高清夜视倒车影像一体机(标配（无内存）)"
-                    target="_blank"
-                  >
-                    <img
-                      class="lazyloading"
-                      src="//gfs17.gomein.net.cn/T1ekVTBQhT1RCvBVdK_160.jpg"
-                      title="磐鼎 P606 汽车载新款隐藏式行车记录仪 锌合金3寸屏单双镜头高清夜视倒车影像一体机(标配（无内存）)"
-                      width="160"
-                      height="160"
-                    />
-                    <p class="img_name">磐鼎 P606 汽车载新款隐藏式行车记录仪 锌合金3寸屏单双镜头高清夜视倒车影像一体机(标配（无内存）)</p>
-                    <div class="hot_price">
-                      <span>¥</span>
-                      <i class="minPrice">0.00</i>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="//item.gome.com.cn/A0005732984-pop8008897211.html"
-                    data-code="1000069770-3"
-                    title="包邮金字號H2行车记录仪双镜头高清夜视1080P后视镜一体机倒车影像停车监控(标配+8G)"
-                    target="_blank"
-                  >
-                    <img
-                      class="lazyloading"
-                      src="//gfs17.gomein.net.cn/T1O1hQBX_v1RCvBVdK_160.jpg"
-                      title="包邮金字號H2行车记录仪双镜头高清夜视1080P后视镜一体机倒车影像停车监控(标配+8G)"
-                      width="160"
-                      height="160"
-                    />
-                    <p class="img_name">包邮金字號H2行车记录仪双镜头高清夜视1080P后视镜一体机倒车影像停车监控(标配+8G)</p>
-                    <div class="hot_price">
-                      <span>¥</span>
-                      <i class="minPrice">0.00</i>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="//item.gome.com.cn/A0006359331-pop8010773359.html"
-                    title="磐鼎 行车记录仪电子狗一体机 安全预警仪固定流动雷达测速仪高清1080p广角夜视一键升级"
-                    target="_blank"
-                  >
-                    <img
-                      class="lazyloading"
-                      src="//gfs17.gomein.net.cn/T117ZgBmYT1RCvBVdK_160.jpg"
-                      title="磐鼎 行车记录仪电子狗一体机 安全预警仪固定流动雷达测速仪高清1080p广角夜视一键升级"
-                      width="160"
-                      height="160"
-                    />
-                    <p class="img_name">磐鼎 行车记录仪电子狗一体机 安全预警仪固定流动雷达测速仪高清1080p广角夜视一键升级</p>
-                    <div class="hot_price">
-                      <span>¥</span>
-                      <i class="minPrice">0.00</i>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="//item.gome.com.cn/A0006195488-pop8009851348.html"
-                    title="磐鼎 7英寸3G后视镜行车记录仪双录倒车后视安卓声控导航仪电子狗一体机(官方标配（无内存）)"
-                    target="_blank"
-                  >
-                    <img
-                      class="lazyloading"
-                      src="//gfs17.gomein.net.cn/T1fsATB4Dv1RCvBVdK_160.jpg"
-                      title="磐鼎 7英寸3G后视镜行车记录仪双录倒车后视安卓声控导航仪电子狗一体机(官方标配（无内存）)"
-                      width="160"
-                      height="160"
-                    />
-                    <p class="img_name">磐鼎 7英寸3G后视镜行车记录仪双录倒车后视安卓声控导航仪电子狗一体机(官方标配（无内存）)</p>
-                    <div class="hot_price" data-target="p-price" data-skuid="pop8009851348">
-                      <span>¥</span>
-                      <i class="minPrice">0.00</i>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="//item.gome.com.cn/A0006354345-pop8010741638.html"
-                    title="磐鼎 360度全景行车记录仪吸盘1080高清夜视360迷你隐藏式车载监控仪循环录像"
-                    target="_blank"
-                  >
-                    <img
-                      class="lazyloading"
-                      src="//gfs17.gomein.net.cn/T19RYgBQLT1RCvBVdK_160.jpg"
-                      title="磐鼎 360度全景行车记录仪吸盘1080高清夜视360迷你隐藏式车载监控仪循环录像"
-                      width="160"
-                      height="160"
-                    />
-                    <p class="img_name">磐鼎 360度全景行车记录仪吸盘1080高清夜视360迷你隐藏式车载监控仪循环录像</p>
-                    <div class="hot_price" data-target="p-price" data-skuid="pop8010741638">
-                      <span>¥</span>
-                      <i class="minPrice">0.00</i>
-                    </div>
-                  </a>
-                </li>
-              </ul>
+          </div>
+          <div class="content">
+            <div class="main_content edit-mode">
+              <div class="floor_img">
+                <a>
+                  <img
+                    class="lazyloading"
+                    :src="list[0].maxImg"
+                    alt="广告_0"
+                    width="380"
+                    height="540"
+                  />
+                </a>
+              </div>
+              <div
+                class="floor_goods"
+                v-for="(iteme,indexs) in list[0].list"
+                :key="indexs"
+                v-show="conIndex1 == indexs"
+              >
+                <ul>
+                  <li v-for="(ele,index) in iteme" :key="index">
+                    <a :title="ele.title">
+                      <img
+                        class="lazyloading"
+                        :src="ele.imgUrl"
+                        :title="ele.title"
+                        width="160"
+                        height="160"
+                      />
+                      <p class="img_name">{{ele.title}}</p>
+                      <div class="hot_price">
+                        <span>¥</span>
+                        <i class="minPrice">{{ele.price}}</i>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wbox lazy-fn-wrap">
+      <div class="wbox floor floor-current">
+        <h2 class="car_title">{{list[1].title}}</h2>
+        <div class="floor_main">
+          <div class="main_tab">
+            <ul>
+              <li
+                v-for="(item,index) in list[1].tab"
+                :key="item.id"
+                @click="conIndex2 = index"
+                :class="{cur : conIndex2 == index}"
+              >
+                <span>{{item.text}}</span>
+                <i></i>
+              </li>
+            </ul>
+            <div class="floor_tab_img">
+              <a>
+                <img
+                  class="lazyloading edit-mode"
+                  :src="list[1].minImg"
+                  alt="广告小图_0"
+                  width="190"
+                  height="250"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="content">
+            <div class="main_content edit-mode">
+              <div class="floor_img">
+                <a>
+                  <img
+                    class="lazyloading"
+                    :src="list[1].maxImg"
+                    alt="广告_0"
+                    width="380"
+                    height="540"
+                  />
+                </a>
+              </div>
+              <div
+                class="floor_goods"
+                v-for="(iteme,indexs) in list[1].list"
+                :key="indexs"
+                v-show="conIndex2 == indexs"
+              >
+                <ul>
+                  <li v-for="(ele,index) in iteme" :key="index">
+                    <a :title="ele.title">
+                      <img
+                        class="lazyloading"
+                        :src="ele.imgUrl"
+                        :title="ele.title"
+                        width="160"
+                        height="160"
+                      />
+                      <p class="img_name">{{ele.title}}</p>
+                      <div class="hot_price">
+                        <span>¥</span>
+                        <i class="minPrice">{{ele.price}}</i>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wbox lazy-fn-wrap">
+      <div class="wbox floor floor-current">
+        <h2 class="car_title">{{list[2].title}}</h2>
+        <div class="floor_main">
+          <div class="main_tab">
+            <ul>
+              <li
+                v-for="(item,index) in list[2].tab"
+                :key="item.id"
+                @click="conIndex3 = index"
+                :class="{cur : conIndex3 == index}"
+              >
+                <span>{{item.text}}</span>
+                <i></i>
+              </li>
+            </ul>
+            <div class="floor_tab_img">
+              <a>
+                <img
+                  class="lazyloading edit-mode"
+                  :src="list[2].minImg"
+                  alt="广告小图_0"
+                  width="190"
+                  height="250"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="content">
+            <div class="main_content edit-mode">
+              <div class="floor_img">
+                <a>
+                  <img
+                    class="lazyloading"
+                    :src="list[2].maxImg"
+                    alt="广告_0"
+                    width="380"
+                    height="540"
+                  />
+                </a>
+              </div>
+              <div
+                class="floor_goods"
+                v-for="(iteme,indexs) in list[2].list"
+                :key="indexs"
+                v-show="conIndex3 == indexs"
+              >
+                <ul>
+                  <li v-for="(ele,index) in iteme" :key="index">
+                    <a :title="ele.title">
+                      <img
+                        class="lazyloading"
+                        :src="ele.imgUrl"
+                        :title="ele.title"
+                        width="160"
+                        height="160"
+                      />
+                      <p class="img_name">{{ele.title}}</p>
+                      <div class="hot_price">
+                        <span>¥</span>
+                        <i class="minPrice">{{ele.price}}</i>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wbox lazy-fn-wrap">
+      <div class="wbox floor floor-current">
+        <h2 class="car_title">{{list[3].title}}</h2>
+        <div class="floor_main">
+          <div class="main_tab">
+            <ul>
+              <li
+                v-for="(item,index) in list[3].tab"
+                :key="item.id"
+                @click="conIndex4 = index"
+                :class="{cur : conIndex4 == index}"
+              >
+                <span>{{item.text}}</span>
+                <i></i>
+              </li>
+            </ul>
+            <div class="floor_tab_img">
+              <a>
+                <img
+                  class="lazyloading edit-mode"
+                  :src="list[3].minImg"
+                  alt="广告小图_0"
+                  width="190"
+                  height="250"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="content">
+            <div class="main_content edit-mode">
+              <div class="floor_img">
+                <a>
+                  <img
+                    class="lazyloading"
+                    :src="list[3].maxImg"
+                    alt="广告_0"
+                    width="380"
+                    height="540"
+                  />
+                </a>
+              </div>
+              <div
+                class="floor_goods"
+                v-for="(iteme,indexs) in list[3].list"
+                :key="indexs"
+                v-show="conIndex4 == indexs"
+              >
+                <ul>
+                  <li v-for="(ele,index) in iteme" :key="index">
+                    <a :title="ele.title">
+                      <img
+                        class="lazyloading"
+                        :src="ele.imgUrl"
+                        :title="ele.title"
+                        width="160"
+                        height="160"
+                      />
+                      <p class="img_name">{{ele.title}}</p>
+                      <div class="hot_price">
+                        <span>¥</span>
+                        <i class="minPrice">{{ele.price}}</i>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="wbox lazy-fn-wrap">
+      <div class="wbox floor floor-current">
+        <h2 class="car_title">{{list[4].title}}</h2>
+        <div class="floor_main">
+          <div class="main_tab">
+            <ul>
+              <li
+                v-for="(item,index) in list[4].tab"
+                :key="item.id"
+                @click="conIndex5 = index"
+                :class="{cur : conIndex5 == index}"
+              >
+                <span>{{item.text}}</span>
+                <i></i>
+              </li>
+            </ul>
+            <div class="floor_tab_img">
+              <a>
+                <img
+                  class="lazyloading edit-mode"
+                  :src="list[4].minImg"
+                  alt="广告小图_0"
+                  width="190"
+                  height="250"
+                />
+              </a>
+            </div>
+          </div>
+          <div class="content">
+            <div class="main_content edit-mode">
+              <div class="floor_img">
+                <a>
+                  <img
+                    class="lazyloading"
+                    :src="list[4].maxImg"
+                    alt="广告_0"
+                    width="380"
+                    height="540"
+                  />
+                </a>
+              </div>
+              <div
+                class="floor_goods"
+                v-for="(iteme,indexs) in list[4].list"
+                :key="indexs"
+                v-show="conIndex5 == indexs"
+              >
+                <ul>
+                  <li v-for="(ele,index) in iteme" :key="index">
+                    <a :title="ele.title">
+                      <img
+                        class="lazyloading"
+                        :src="ele.imgUrl"
+                        :title="ele.title"
+                        width="160"
+                        height="160"
+                      />
+                      <p class="img_name">{{ele.title}}</p>
+                      <div class="hot_price">
+                        <span>¥</span>
+                        <i class="minPrice">{{ele.price}}</i>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -184,13 +359,34 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      list: [],
+      conIndex1: 0,
+      conIndex2: 0,
+      conIndex3: 0,
+      conIndex4: 0,
+      conIndex5: 0,
+    };
+  },
+  created() {
+    this.$post("goods/goodHome").then((res) =>
+      res.forEach((item) => this.list.push(item))
+    );
+  },
+  mounted() {
+    console.log(this.list);
+  },
+  methods: {},
+};
 </script>
 
 <style lang="scss" scoped>
 .floor {
   height: 576px;
   padding-top: 19px;
+  overflow: hidden;
 
   .car_title {
     line-height: 24px;

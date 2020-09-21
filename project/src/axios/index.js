@@ -1,7 +1,7 @@
 import axios from "axios"; // 引入axios
 import QS from "qs"; // 引入qs模块，用来序列化post类型的数据
 
-const str = "http://localhost:10086";
+const str = "http://localhost:10086/";
 
 /** 
  * post方法，对应post请求 
@@ -21,4 +21,4 @@ export function post(url, params) {
 }
 
 // res为返回数据
-// this.$post("接口路径").then(res => this.list = res); 
+// this.$post("接口路径").then(res => res); 

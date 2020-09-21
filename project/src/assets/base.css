@@ -123,6 +123,11 @@ em {
     margin: 0 auto;
 }
 
+.container {
+    width: 990px;
+    margin: 0 auto;
+}
+
 .fl {
     float: left;
 }
@@ -144,7 +149,7 @@ em {
 }
 
 .mg {
-    margin: auto
+    margin: 0 auto
 }
 
 /* --------------------字体大小-------------------- */

@@ -27,6 +27,16 @@ const routes = [{
     component: () => import('../components/List/List.vue')
   },
   {
+    path: "/collection",
+    name: "collection",
+    component: () => import('../views/Collection.vue')
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: () => import('../views/Cart.vue')
+  },
+  {
     path: '/',
     redirect: '/home'
   }, {
