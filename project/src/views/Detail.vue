@@ -2,16 +2,22 @@
 <div class="box">
   <detaiilProduct/>
   <detaiil-tabs/>
+  <Footer />
+  <Right />
 </div>
 </template>
 
 <script>
 import detaiilProduct from "../components/Detail/detaiil-Product";
 import detaiilTabs from "../components/Detail/detaiil-Tabs";
+import Footer from "../components/Footer";
+import Right from "../components/Right";
 export default {
   components: {
     detaiilProduct,
-    detaiilTabs
+    detaiilTabs,
+    Footer,
+    Right
   }
 };
 </script>

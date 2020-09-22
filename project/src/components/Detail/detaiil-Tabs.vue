@@ -1,5 +1,5 @@
 <template>
-	 <div class="clearfix" id="tabbox">
+	 <div class="clearfix" id="tabbox" >
 		  <el-tabs v-model="activeName"  @tab-click="handleClick">
 		  	<el-tab-pane label="商品详情" name="first">
           <div class="guigecanshu_wrap">
@@ -252,7 +252,12 @@
 export default {
   data() {
     return {
+      // 默认显示第一个tabs
       activeName: "first",
+      // 吸顶判断
+      isFixed: false,
+      offsetTop: 0,
+      // 商品详情
       adetailimg: [
         {
           id: 1,
@@ -265,6 +270,7 @@ export default {
           img: "https://gfs3.gomein.net.cn/T1RzVQBvLT1RCvBVdK"
         }
       ],
+      // 商品评价
       ashopappraise: [
         {
           id: 1
@@ -274,32 +280,37 @@ export default {
         },
         {
           id: 3
-        },
-        {
-          id: 4
-        },
-        {
-          id: 2
-        },
-        {
-          id: 3
-        },{
-          id: 1
-        },
-        {
-          id: 2
-        },
-        {
-          id: 3
-        },
+        }
       ]
     };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.initHeight);
+    this.$nextTick(() => {
+      //获取对象相对于版面或由 offsetTop 属性指定的父坐标的计算顶端位置
+      console.log(document.querySelector(".el-tabs__header"));
+      
+      this.offsetTop = document.querySelector(".el-tabs__header").offsetTop;
+    });
   },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event);
+    },
+    initHeight() {
+      // 设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 (被卷曲的高度)
+      var scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      // 如果被卷曲的高度大于吸顶元素到顶端位置 的距离
+      this.isFixed = scrollTop > this.offsetTop ? document.querySelector(".el-tabs__header").style="position: fixed;top: 0;z-index: 11;box-shadow: 0 1px 5px #ccc;width: 1200px;overflow: hidden;" : document.querySelector(".el-tabs__header").style="position: none;";
     }
-  }
+  },
+  //回调中移除监听
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
 };
 </script>
 
@@ -336,6 +347,15 @@ export default {
     top: 0;
     height: 3px;
   }
+}
+// 吸顶
+.onfixed {
+  position: fixed;
+  top: 0;
+  z-index: 11;
+  box-shadow: 0 1px 5px #ccc;
+  width: 1200px;
+  overflow: hidden;
 }
 .guigecanshu_wrap {
   border: 1px solid #eee;

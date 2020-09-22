@@ -1,5 +1,11 @@
 <template>
-  <div class="uc_overdueTable mg">
+  <div id="cont">
+    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane name="first">
+      <span slot="label">
+        待付款0
+      </span>
+      <div class="uc_overdueTable mg">
     <div class="list-thead">
       <div class="col432">
         <label class="label">
@@ -67,13 +73,47 @@
       </ul>
     </div>
   </div>
+    </el-tab-pane>
+    <el-tab-pane label="待收货0" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="待评价晒单 0" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="常购清单" name="fourth">定时任务补偿</el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      activeName: "first"
+    };
+  },
+  methods: {
+    handleClick(tab, event) {
+      console.log(tab, event);
+    }
+  }
+};
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+#cont {
+  width: 1000px;
+  margin: auto;
+  > .el-tabs .el-tabs__nav-wrap {
+    border: 1px solid #e6e6e6;
+    /* margin: 0 20px; */
+    /* padding: 10px 10px 6px; */
+    border-bottom: 0;
+    padding: 6px 10px 0px 10px;
+  }
+  > .el-tabs .el-tabs__nav {
+    padding-bottom: 4px;
+  }
+  > .el-tabs .el-tabs__nav-wrap::after {
+    height: 1px;
+  }
+}
 .button-grey,
 .button-no,
 .button-red,
@@ -88,7 +128,7 @@ export default {};
 }
 
 .uc_overdueTable {
-  width: 980px;
+  // width: 980px;
 
   .list-thead {
     background: #f3f3f3;
