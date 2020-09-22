@@ -62,6 +62,9 @@ export default {
       // 做出pc端有点小刷新，跳转的感觉
       let { href } = this.$router.resolve({
         path: "/login",
+        // query: {
+        //   text: "listdata",
+        // },
       });
       window.open(href, "_self");
       location.reload();

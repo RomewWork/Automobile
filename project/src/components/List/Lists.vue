@@ -10,19 +10,23 @@
               :class="{'cur':currentSort==index}"
               @click="addcur(index)"
             >
-              <a>{{ item.title }}</a>
+              <a>
+                {{ item.title }}
+                <i
+                  class="el-icon-top"
+                  style="color:white;"
+                  v-show="item.bool == true"
+                ></i>
+                <i class="el-icon-bottom" style="color:white;" v-show="item.bool == false"></i>
+              </a>
             </li>
-            <!-- <li class="price-down">
-            <a href="###">价格</a>
-            <i class="icon-up-down"></i>
-            </li>-->
           </ul>
           <div class="block">
             <el-pagination
-              current-page.sync="1"
-              :page-size="10"
+              :current-page.sync="ipage"
+              :page-size="num"
               layout="prev, pager, next, jumper"
-              :total="100"
+              :total="list.total"
               @current-change="changeNum"
             ></el-pagination>
           </div>
@@ -31,26 +35,26 @@
     </div>
     <div class="product-box">
       <ul class="product-lists clearfix">
-        <li class="product-item" v-for="(item,index) in ashopList" :key="index">
+        <li class="product-item" v-for="(item,index) in list.list" :key="index">
           <div class="item-tab">
             <p class="item-pic">
-              <a>
-                <img src="../../assets/jiaquan.webp" alt />
+              <a @click="go(item.gid)">
+                <img :src="item.imgUrl" />
               </a>
             </p>
             <div>
               <p class="item-price">
                 <span class="price">¥</span>
-                <span class="price">{{item.shopprice}}</span>
+                <span class="price">{{item.price}}</span>
               </p>
             </div>
             <p class="item-name">
-              <a>卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)</a>
+              <a @click="go(item.gid)">卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)</a>
             </p>
             <p class="item-comment-dispatching">
               <a class="comment">
                 <span>已有</span>
-                12
+                {{item.evaluate}}
                 <span>人评价</span>
               </a>
             </p>
@@ -62,7 +66,7 @@
               <span class="add-collection" title="收藏">
                 <i class="icon"></i>
               </span>
-              <a class="add-cart addTo-cart">
+              <a class="add-cart addTo-cart" title="加入购物车">
                 <i class="icon"></i>
               </a>
               <span class="online-server" title="在线客服">
@@ -85,75 +89,38 @@ export default {
       offsetTop: 0,
       // cur样式初始索引
       currentSort: 0,
-      num: 1,
+      num: 48,
+      ipage: 1,
+      list: [],
+      index0Num: 0,
+      index1Num: 0,
+      index2Num: 0,
+      index3Num: 0,
       atabList: [
         {
           title: "综合",
+          meet: "goodlist",
         },
         {
           title: "销量",
-        },
-        {
-          title: "新品",
+          bool: false,
+          meet: "goodlist1",
         },
         {
           title: "评价",
+          bool: false,
+          meet: "goodlist2",
         },
         {
           title: "价格",
-        },
-      ],
-      ashopList: [
-        {
-          id: 1,
-          shopimg: "../../assets/jiaquan.webp",
-          shopprice: 13,
-          shopname:
-            "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12,
-        },
-        {
-          id: 2,
-          shopimg: "../../assets/jiaquan.webp",
-          shopprice: 12,
-          shopname:
-            "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12,
-        },
-        {
-          id: 3,
-          shopimg: "../../assets/jiaquan.webp",
-          shopprice: 12,
-          shopname:
-            "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12,
-        },
-        {
-          id: 4,
-          shopimg: "../../assets/jiaquan.webp",
-          shopprice: 12,
-          shopname:
-            "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12,
-        },
-        {
-          id: 5,
-          shopimg: "../../assets/jiaquan.webp",
-          shopprice: 12,
-          shopname:
-            "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12,
-        },
-        {
-          id: 6,
-          shopimg: "../../assets/jiaquan.webp",
-          shopprice: 12,
-          shopname:
-            "卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)",
-          shopcomment: 12,
+          bool: false,
+          meet: "goodlist3",
         },
       ],
     };
+  },
+  created() {
+    this.getData(this.atabList[0].meet);
   },
   mounted() {
     window.addEventListener("scroll", this.initHeight);
@@ -163,8 +130,67 @@ export default {
     });
   },
   methods: {
+    go(gid) {
+      let { href } = this.$router.resolve({
+        path: "/detail",
+        query: {
+          gid,
+        },
+      });
+      window.open(href, "_blank");
+    },
     addcur(index) {
       this.currentSort = index;
+      this.ipage = 1;
+      if (index == 0) {
+        for (let i = 1; i <= 3; i++) this.atabList[i].bool = false;
+
+        this.getData(this.atabList[index].meet);
+      } else if (index == 1) {
+        this.index1Num++;
+
+        if (this.index2Num != 0 || this.index3Num != 0) {
+          this.atabList[index].bool = false;
+          this.index2Num = 0;
+          this.index3Num = 0;
+        }
+
+        this.atabList[index].bool = !this.atabList[index].bool;
+        this.getData(this.atabList[index].meet, this.atabList[index].bool);
+      } else if (index == 2) {
+        this.index2Num++;
+
+        if (this.index1Num != 0 || this.index3Num != 0) {
+          this.atabList[index].bool = false;
+          this.index1Num = 0;
+          this.index3Num = 0;
+        }
+
+        this.atabList[index].bool = !this.atabList[index].bool;
+        this.getData(this.atabList[index].meet, this.atabList[index].bool);
+      } else if (index == 3) {
+        this.index3Num++;
+
+        if (this.index1Num != 0 || this.index2Num != 0) {
+          this.atabList[index].bool = false;
+          this.index1Num = 0;
+          this.index2Num = 0;
+        }
+
+        this.atabList[index].bool = !this.atabList[index].bool;
+        this.getData(this.atabList[index].meet, this.atabList[index].bool);
+      }
+    },
+    getData(meet, sales) {
+      let obj = {
+        page: this.ipage,
+        num: this.num,
+        classname: this.$route.query.text,
+        sales,
+      };
+      this.$post(`goods/${meet}`, obj).then((res) =>
+        res.list.forEach((item) => (this.list = res))
+      );
     },
     initHeight() {
       // 设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 (被卷曲的高度)
@@ -176,7 +202,11 @@ export default {
       this.isFixed = scrollTop > this.offsetTop ? true : false;
     },
     changeNum(val) {
-      console.log(val);
+      this.ipage = val;
+      this.getData(
+        this.atabList[this.currentSort].meet,
+        this.atabList[this.currentSort].bool
+      );
     },
   },
   //回调中移除监听
@@ -265,7 +295,7 @@ export default {
 .product-lists {
   margin-top: 10px;
   .product-item:hover {
-    border-color: #e6e6e6;
+    border-color: pink;
     box-shadow: 0 0 1px #e6e6e6;
     position: relative;
     z-index: 2;
