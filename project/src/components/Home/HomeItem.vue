@@ -12,8 +12,10 @@
                 @click="conIndex1 = index"
                 :class="{cur : conIndex1 == index}"
               >
-                <span>{{item.text}}</span>
-                <i></i>
+                <div @click="go(item.text)">
+                  <span>{{item.text}}</span>
+                  <i></i>
+                </div>
               </li>
             </ul>
             <div class="floor_tab_img">
@@ -49,7 +51,7 @@
               >
                 <ul>
                   <li v-for="(ele,index) in iteme" :key="index">
-                    <a :title="ele.title">
+                    <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
                         :src="ele.imgUrl"
@@ -83,8 +85,10 @@
                 @click="conIndex2 = index"
                 :class="{cur : conIndex2 == index}"
               >
-                <span>{{item.text}}</span>
-                <i></i>
+                <div @click="go(item.text)">
+                  <span>{{item.text}}</span>
+                  <i></i>
+                </div>
               </li>
             </ul>
             <div class="floor_tab_img">
@@ -120,7 +124,7 @@
               >
                 <ul>
                   <li v-for="(ele,index) in iteme" :key="index">
-                    <a :title="ele.title">
+                    <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
                         :src="ele.imgUrl"
@@ -154,8 +158,10 @@
                 @click="conIndex3 = index"
                 :class="{cur : conIndex3 == index}"
               >
-                <span>{{item.text}}</span>
-                <i></i>
+                <div @click="go(item.text)">
+                  <span>{{item.text}}</span>
+                  <i></i>
+                </div>
               </li>
             </ul>
             <div class="floor_tab_img">
@@ -191,7 +197,7 @@
               >
                 <ul>
                   <li v-for="(ele,index) in iteme" :key="index">
-                    <a :title="ele.title">
+                    <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
                         :src="ele.imgUrl"
@@ -225,8 +231,10 @@
                 @click="conIndex4 = index"
                 :class="{cur : conIndex4 == index}"
               >
-                <span>{{item.text}}</span>
-                <i></i>
+                <div @click="go(item.text)">
+                  <span>{{item.text}}</span>
+                  <i></i>
+                </div>
               </li>
             </ul>
             <div class="floor_tab_img">
@@ -262,7 +270,7 @@
               >
                 <ul>
                   <li v-for="(ele,index) in iteme" :key="index">
-                    <a :title="ele.title">
+                    <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
                         :src="ele.imgUrl"
@@ -296,8 +304,10 @@
                 @click="conIndex5 = index"
                 :class="{cur : conIndex5 == index}"
               >
-                <span>{{item.text}}</span>
-                <i></i>
+                <div @click="go(item.text)">
+                  <span>{{item.text}}</span>
+                  <i></i>
+                </div>
               </li>
             </ul>
             <div class="floor_tab_img">
@@ -333,7 +343,7 @@
               >
                 <ul>
                   <li v-for="(ele,index) in iteme" :key="index">
-                    <a :title="ele.title">
+                    <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
                         :src="ele.imgUrl"
@@ -375,10 +385,26 @@ export default {
       res.forEach((item) => this.list.push(item))
     );
   },
-  mounted() {
-    console.log(this.list);
+  methods: {
+    go(text) {
+      let { href } = this.$router.resolve({
+        path: "/list",
+        query: {
+          text,
+        },
+      });
+      window.open(href, "_blank");
+    },
+    goto(gid) {
+      let { href } = this.$router.resolve({
+        path: "/detail",
+        query: {
+          gid,
+        },
+      });
+      window.open(href, "_blank");
+    },
   },
-  methods: {},
 };
 </script>
 

@@ -192,41 +192,40 @@ Router.post("/listGood", async (req, res) => {
 // 前台列表接口
 // 正常数据
 Router.post("/goodlist", async (req, res) => {
-  let sql1 = "SELECT * FROM listdata";
-
-  let data1 = await query(sql1); //数组 [{},{},{}] 总条数==数组长度
 
   //查询数据库的数据
+  let nums = 0;
+  let data3 = [];
   let result = {};
   let {
     page,
     num,
-    nums,
     classname
   } = req.body; //{page:1,num:5} 查询第一页5条数据
 
-
   // let sql = `SELECT * FROM ${name} limit ${index},${num}`;
-  let sql = `SELECT * FROM listdata where classification='${classname}'`;
+  let sql2 = `SELECT * FROM listdata where classification='${classname}'`;
 
-  let data = await query(sql);
+  let data2 = await query(sql2);
 
   let index = (page - 1) * num;
+  nums = page * num
 
   for (let i = index; i < nums; i++) {
-    data2.push(data[i]);
+    data3.push(data2[i]);
   }
 
-  let pages = Math.ceil(data1.length / num);
+  data3 = data3.filter(item => item != null);
 
+  let pages = Math.ceil(data2.length / num);
   result = {
     type: 1, //成功，
     mes: "成功",
-    total: data1.length, //总条数
+    total: data2.length, //总条数
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data2, //数据
+    list: data3, //数据
   };
 
   res.send(result);
@@ -235,69 +234,37 @@ Router.post("/goodlist", async (req, res) => {
 // 前台列表接口
 // 销量
 Router.post("/goodlist1", async (req, res) => {
-  // res.Header('Content-Type', 'text/html; charset=utf-8');
-  //查询数据库的数据
-  let sql1 = `
-    SELECT * FROM listdata where classification = '${classname}'
-    `;
 
-  let data1 = await query(sql1);
+  let {
+    page,
+    num,
+    classname,
+    sales
+  } = req.body; //{page:1,num:5} 查询第一页5条数据
 
   let data2 = [];
+  let data3 = [];
+  let nums = 0;
   let result = {};
-  let {
-    page,
-    num,
-    nums
-  } = req.body; //{page:1,num:5} 查询第一页5条数据
 
-  let index = (page - 1) * num;
-
-  for (let i = index; i < nums; i++) {
-    data2.push(data1[i]);
-  }
-  let pages = Math.ceil(data1.length / num);
-  result = {
-    type: 1, //成功，
-    mes: "成功",
-    total: data1.length, //总条数
-    pages, //总页码
-    page, //当前页
-    num, //每页条数
-    list: data2, //数据
-  };
-  res.send(result);
-});
-
-// 前台列表接口
-// 价格升序
-Router.post("/goodlist1", async (req, res) => {
-  let sql1 = `
-    SELECT * FROM $ {
-      name
-    }
-    ORDER BY price ASC `;
+  //查询数据库的数据
+  let sql1 = `SELECT * FROM listdata where classification = '${classname}'`;
 
   let data1 = await query(sql1);
 
-  let data2 = [];
-
-  let result = {}; //传给客户端的数据  null假  {}真  []真  null假
-
-  let {
-    page,
-    num,
-    nums
-  } = req.body; //{page:1,num:5} 查询第一页5条数据
-
   let index = (page - 1) * num;
+  nums = page * num
+
+  if (sales == "true") data2 = data1.sort((a, b) => a.salesVolume - b.salesVolume);
+  else data2 = data1.sort((b, a) => a.salesVolume - b.salesVolume);
 
   for (let i = index; i < nums; i++) {
-    data2.push(data1[i]);
+    data3.push(data2[i]);
   }
 
-  let pages = Math.ceil(data1.length / num);
+  data3 = data3.filter(item => item != null);
 
+  let pages = Math.ceil(data1.length / num);
   result = {
     type: 1, //成功，
     mes: "成功",
@@ -305,87 +272,91 @@ Router.post("/goodlist1", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data2, //数据
+    list: data3, //数据
   };
-
   res.send(result);
 });
 
 // 前台列表接口
-// 价格降序
+// 评价
+Router.post("/goodlist2", async (req, res) => {
+
+  let {
+    page,
+    num,
+    classname,
+    sales
+  } = req.body; //{page:1,num:5} 查询第一页5条数据
+
+  let data2 = [];
+  let data3 = [];
+  let nums = 0;
+  let result = {};
+
+  //查询数据库的数据
+  let sql1 = `SELECT * FROM listdata where classification = '${classname}'`;
+
+  let data1 = await query(sql1);
+
+  let index = (page - 1) * num;
+  nums = page * num
+
+  if (sales == "true") data2 = data1.sort((a, b) => a.evaluate - b.evaluate);
+  else data2 = data1.sort((b, a) => a.evaluate - b.evaluate);
+
+  for (let i = index; i < nums; i++) {
+    data3.push(data2[i]);
+  }
+
+  data3 = data3.filter(item => item != null);
+
+  let pages = Math.ceil(data1.length / num);
+  result = {
+    type: 1, //成功，
+    mes: "成功",
+    total: data1.length, //总条数
+    pages, //总页码
+    page, //当前页
+    num, //每页条数
+    list: data3, //数据
+  };
+  res.send(result);
+});
+
+// 前台列表接口
+// 价格
 Router.post("/goodlist3", async (req, res) => {
-  let sql1 = `
-    SELECT * FROM $ {
-      name
-    }
-    ORDER BY price DESC `;
-
-  let data1 = await query(sql1);
-
-  let data2 = [];
-
-  let result = {};
 
   let {
     page,
     num,
-    nums
-  } = req.body;
+    classname,
+    sales
+  } = req.body; //{page:1,num:5} 查询第一页5条数据
 
-  let index = (page - 1) * num;
-
-  for (let i = index; i < nums; i++) {
-    data2.push(data1[i]);
-  }
-
-  let pages = Math.ceil(data1.length / num);
-
-  result = {
-    type: 1, //成功，
-    mes: "成功",
-    total: data1.length, //总条数
-    pages, //总页码
-    page, //当前页
-    num, //每页条数
-    list: data2, //数据
-  };
-
-  res.send(result);
-});
-
-//get请求获取所有是商品数据 : page=1  num=11  列表页数据
-Router.post("/goodlists", async (req, res) => {
-  //查全部数据
-  let sql1 = "SELECT * FROM listdata";
-  let data1 = await query(sql1); //数组 [{},{},{}] 总条数==数组长度
+  let data2 = [];
+  let data3 = [];
+  let nums = 0;
+  let result = {};
 
   //查询数据库的数据
-  let sql = "";
+  let sql1 = `SELECT * FROM listdata where classification = '${classname}'`;
 
-  let result = {}; //传给客户端的数据  null假  {}真  []真  null假
-  let {
-    name,
-    page,
-    num
-  } = req.params; //{page:1,num:5} 查询第一页5条数据
+  let data1 = await query(sql1);
 
   let index = (page - 1) * num;
+  nums = page * num
 
-  sql = `
-    SELECT * FROM $ {
-      name
-    }
-    limit $ {
-      index
-    }, $ {
-      num
-    }
-    `;
+  if (sales == "true") data2 = data1.sort((a, b) => a.price - b.price);
+  else data2 = data1.sort((b, a) => a.price - b.price);
 
-  let data = await query(sql);
+  for (let i = index; i < nums; i++) {
+    data3.push(data2[i]);
+  }
+
+  data3 = data3.filter(item => item != null);
 
   let pages = Math.ceil(data1.length / num);
-
   result = {
     type: 1, //成功，
     mes: "成功",
@@ -393,9 +364,8 @@ Router.post("/goodlists", async (req, res) => {
     pages, //总页码
     page, //当前页
     num, //每页条数
-    list: data, //数据
+    list: data3, //数据
   };
-
   res.send(result);
 });
 

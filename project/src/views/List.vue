@@ -1,15 +1,21 @@
 <template>
   <div class="nSearchWarp">
-    <Lists/>
+    <Lists />
+    <Footer />
+    <Right />
   </div>
 </template>
 
 <script>
 import Lists from "../components/List/Lists";
+import Footer from "../components/Footer";
+import Right from "../components/Right";
 export default {
   components: {
-    Lists
-  }
+    Lists,
+    Footer,
+    Right,
+  },
 };
 </script>
 
