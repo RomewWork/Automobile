@@ -57,6 +57,115 @@
                 <a>商品评价</a>
               </li>
             </ul>
+            <div class="ds-bd active">
+              <div class="sorceOut clearfix">
+                <div class="sor">
+                  <div class="sper">
+                    <span>100</span>
+                    <b>%</b>
+                    <em>好评度</em>
+                  </div>
+                  <div class="gmb">
+                    <p>好评
+                      <span>(100%)</span>
+                      <em>
+                        <b style="width:100%"></b>
+                      </em>
+                    </p>
+                    <p>中评
+                      <span>(0%)</span>
+                      <em>
+                        <b style="width:0%"></b>
+                      </em>
+                    </p>
+                    <p>差评
+                      <span>(0%)</span>
+                      <em>
+                        <b style="width:0%"></b>
+                      </em>
+                    </p>
+                  </div>
+                </div>
+                <div class="spot">
+                  <p>买家印象：</p>
+                  <div class="spots">					</div>
+                </div>
+                <div class="comt">		您可对已购的商品进行评价		
+                  <a class="redlink">发表评价拿美豆</a>
+                  <span style="display:block">100美豆=1元
+                    <a title="评价规则">评价规则</a>
+                  </span>
+                </div>
+              </div>
+              <div class="appraiseType">
+                <label class="active">
+                  <input type="radio" checked="checked">
+                  <span>全部评价(12)</span>
+                </label>
+                <label>
+                  <input type="radio" checked="checked">
+                  <span>晒图(0)</span>
+                </label>
+                <label>
+                  <input type="radio" checked="checked">
+                  <span>好评(12)</span>
+                </label>
+                <label>
+                  <input type="radio" checked="checked">
+                  <span>中评(0)</span>
+                </label>
+                <label>
+                  <input type="radio" checked="checked">
+                  <span>差评(0)</span>
+                </label>
+                <label class="curgood-label">
+                  <input type="radio" checked="checked">
+                  <span>只看当前商品评价</span>
+                </label>
+              </div>
+              <div class="cmt-con" style="display: block;">
+                <div class="product-comment clearfix">
+                  <ul class="replyListWrap" v-for="(item,index) in ashopappraise" :key="index">
+                    <li>
+                      <div class="reply-left">
+                        <div class="reply_avatar">
+                          <img src="../../assets/picture.webp" alt="">
+                          <span class="reply_avatar_userName">g***c</span>
+                        </div>
+                        <p class="profileGrade">
+                          <span class="viplevel">G2会员</span>
+                          <span class="area">青岛市</span>
+                        </p>
+                      </div>
+                      <div class="reply-center">
+                        <div class="reply-center-inner">
+                          <span class="detail-star bgiprd">
+                            <b style="width:100%" class="bgiprd"></b>
+                          </span>
+                          <div class="shiyongxinde">
+                            <em>使用心得：</em>
+                            宝贝已签收，主人很忙未留下墨宝足迹
+                          </div>
+                          <div class="info-time">
+                            <span class="days-comm">收货后3天评价</span>
+                            <a>2018-03-31 11:45</a>
+                             <div class="zt-rc">
+                               <a class="woZanTong">
+                                 <b>赞同</b>
+                               </a>
+                               <a class="replyComments">
+                                 <b class="reply_sofa"></b>
+                                 回复
+                               </a>
+                             </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </el-tab-pane>
 		  	<el-tab-pane label="售后保障" name="fourth">
@@ -155,6 +264,34 @@ export default {
           title: "07.jpg",
           img: "https://gfs3.gomein.net.cn/T1RzVQBvLT1RCvBVdK"
         }
+      ],
+      ashopappraise: [
+        {
+          id: 1
+        },
+        {
+          id: 2
+        },
+        {
+          id: 3
+        },
+        {
+          id: 4
+        },
+        {
+          id: 2
+        },
+        {
+          id: 3
+        },{
+          id: 1
+        },
+        {
+          id: 2
+        },
+        {
+          id: 3
+        },
       ]
     };
   },
@@ -169,6 +306,7 @@ export default {
 <style lang="scss">
 // el-tabs 样式穿透修改
 #tabbox {
+  font: 12px/1.5 arial, Microsoft YaHei;
   margin-top: 25px;
   > .el-tabs .el-tabs__nav-wrap {
     height: 36px;
@@ -485,13 +623,347 @@ export default {
 
 // 商品评价
 .detail-section {
-    margin-bottom: 10px;
-    zoom: 1;
+  margin-bottom: 10px;
+  zoom: 1;
 }
 .ds-hd {
-    height: 36px;
-    background-color: #f6f6f6;
-    border: 1px solid #eee;
-    overflow: hidden;
+  height: 36px;
+  background-color: #f6f6f6;
+  border: 1px solid #eee;
+  overflow: hidden;
+  li {
+    float: left;
+    height: 32px;
+    a {
+      float: left;
+      display: block;
+      padding: 0 20px;
+      color: #666;
+      cursor: default;
+      font-size: 14px;
+      line-height: 36px;
+      text-align: center;
+    }
+  }
+}
+
+.sorceOut {
+  height: auto;
+  padding: 17px 0 14px 65px;
+}
+.sor {
+  width: 330px;
+}
+.sper span {
+  font-size: 48px;
+  color: #e3101e;
+  font-family: Arial;
+  height: 48px;
+  overflow: hidden;
+}
+.sper b {
+  color: #e3101e;
+  font-size: 20px;
+}
+.sper em {
+  color: #a5a5a5;
+  text-indent: -20px;
+  margin-top: -5px;
+  display: block;
+}
+.gmb {
+  margin-right: 30px;
+  margin-top: 12px;
+  p {
+    margin-bottom: 10px;
+  }
+  span {
+    color: #a5a5a5;
+    margin: 0 10px 0 7px;
+    display: inline-block;
+    width: 35px;
+  }
+  em {
+    display: inline-block;
+    height: 10px;
+    width: 100px;
+    background: #f3f3f3;
+    position: relative;
+    top: 2px;
+  }
+  b {
+    display: block;
+    position: absolute;
+    height: 10px;
+    background: #e3101e;
+    left: 0;
+    top: 0;
+  }
+}
+.spot {
+  width: 322px;
+  min-height: 95px;
+  border-left: 1px solid #f3f3f3;
+  border-right: 1px solid #f3f3f3;
+  padding: 0 30px;
+  p {
+    color: #a5a5a5;
+    text-align: left;
+  }
+}
+.spots {
+  height: auto;
+  overflow: hidden;
+  text-align: left;
+}
+.comt {
+  padding: 7px 0 0 10px;
+  width: 190px;
+}
+.sorceOut .comt a.redlink {
+  height: 28px;
+  line-height: 28px;
+  margin: 7px auto;
+}
+a.redlink {
+  background: #e3101e;
+  height: 25px;
+  line-height: 25px;
+  display: inline-block;
+  color: #fff;
+  text-align: center;
+  padding: 0 20px;
+  text-decoration: none;
+}
+.comt a {
+  display: block;
+  background: #e3101e;
+  color: #fff;
+  width: 90px;
+  height: 26px;
+  text-align: center;
+  line-height: 26px;
+  margin: 3px auto;
+  padding: 0 10px;
+}
+.comt span a {
+  color: #069;
+  display: inline;
+  background: #fff;
+  margin: 0;
+  width: auto;
+}
+.cc-tit em,
+.gmb,
+.showall {
+  float: right;
+  display: inline;
+}
+.avatar,
+.commt-c,
+.comt,
+.csnum,
+.ctopic,
+.detail-star,
+.sor,
+.sper,
+.spot {
+  float: left;
+  display: inline;
+  text-align: center;
+}
+.appraiseType {
+  background-color: #f6f6f6;
+  line-height: 38px;
+  border: 1px solid #eee;
+  position: relative;
+  label {
+    padding-left: 0;
+    margin-right: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    span {
+      color: #666;
+      font-weight: 400;
+    }
+  }
+  input {
+    opacity: 0;
+    vertical-align: middle;
+  }
+  .curgood-label input {
+    margin-left: 2px;
+  }
+}
+.appraiseType label.active span,
+.appraiseType label:hover span {
+  color: #e3101e;
+}
+
+.replyListWrap li {
+  padding: 20px 0;
+  border-bottom: 1px solid #f3f3f3;
+  position: relative;
+  overflow: hidden;
+  .reply-left {
+    padding: 0 20px;
+    width: 150px;
+    p {
+      padding: 7px 0 2px;
+      max-width: 144px;
+      word-wrap: break-word;
+      word-break: break-all;
+      span {
+        display: inline-block;
+        word-break: break-all;
+        word-wrap: break-word;
+        max-width: 100px;
+      }
+    }
+  }
+  .reply-center {
+    width: 790px;
+    .detail-star {
+      float: none;
+      display: block;
+      margin-bottom: 10px;
+      margin-top: 5px;
+      text-align: left;
+    }
+  }
+  .reply-center-inner .info-time span {
+    margin-right: 10px;
+  }
+}
+.replyListWrap .reply-center-inner .info-time .zt-rc {
+  position: absolute;
+  right: 0;
+  top: 0;
+  min-width: 129px;
+}
+.replyListWrap .reply-center-inner .info-time {
+  position: relative;
+  color: #999;
+  margin-top: 10px;
+}
+
+.replyListWrap .reply-center-inner .info-time a:hover {
+  color: #e3010e;
+  text-decoration: underline;
+}
+.replyComments:hover,
+.woZanTong:hover {
+  color: #e3101e !important;
+}
+.woZanTong {
+  color: #999 !important;
+  padding: 4px 0 4px 29px;
+  float: left;
+  background: url(../../assets/bg-sprite.png) no-repeat 0 -1px;
+  background-position: 0 -1235px;
+  b {
+    font-weight: 400;
+  }
+}
+.woZanTong:hover {
+  background: url(../../assets/bg-sprite.png) no-repeat 0 -1px;
+  background-position: 0 -1267px;
+}
+.replyComments {
+  color: #999 !important;
+  padding: 3px 0 4px 29px;
+  margin-left: 20px;
+  position: relative;
+  float: right;
+  background: url(../../assets/bg-sprite.png) no-repeat 0 0;
+  background-position: 0 -1300px;
+  min-width: 24px;
+  b {
+    font-weight: 400;
+  }
+}
+.replyComments:hover {
+  background: url(../../assets/bg-sprite.png) no-repeat 0 0;
+  background-position: 0 -1332px;
+}
+.reply_sofa {
+  background-position: 0 -120px;
+  height: 12px;
+  width: 16px;
+  position: absolute;
+  top: 3px;
+  left: 0;
+}
+.replyListWrap .profileGrade .viplevel {
+  color: #e3101e;
+  margin-right: 7px;
+}
+.detail-star {
+  width: 108px;
+  height: 20px;
+  position: relative;
+  display: inline-block;
+  background: url(../../assets/bg-sprite.png) no-repeat;
+  background-position: 0 -1411px;
+  b {
+    display: inline-block;
+    height: 20px;
+    background: url(../../assets/bg-sprite.png) no-repeat;
+    background-position: 0 -1441px;
+  }
+}
+.shiyongxinde,
+.tuijiandian {
+  line-height: 22px;
+}
+.shiyongxinde {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+.shiyongxinde em,
+.tuijiandian em {
+  color: #5a5a5a;
+  text-align: right;
+  display: inline-block;
+}
+
+.replyListWrap .reply_avatar {
+  margin-bottom: 4px;
+  margin-left: 0;
+  width: auto;
+  text-align: left;
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-right: 9px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+.replyListWrap .reply_avatar_userName {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 74px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 14px;
+}
+.replyListWrap li .reply-left p,
+.replyListWrap li .reply-left p a,
+.replyListWrap li .reply-left p span {
+  color: #5e5e5e;
+}
+.replyListWrap .profileGrade .area,
+.replyListWrap .reply_avatar_userName p {
+  color: #999;
+}
+.replyListWrap li .reply-center,
+.replyListWrap li .reply-left {
+  float: left;
 }
 </style>

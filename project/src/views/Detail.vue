@@ -21,6 +21,6 @@ export default {
   width: 1200px;
   margin: 0 auto;
   color: #5e5e5e;
-  font: 12px/12px arial, Microsoft YaHei;
+  // font: 12px/12px arial, Microsoft YaHei;
 }
 </style>
