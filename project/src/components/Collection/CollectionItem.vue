@@ -3,7 +3,7 @@
     <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane name="first">
       <span slot="label">
-        待付款0
+        待付款 0
       </span>
       <div class="uc_overdueTable mg">
     <div class="list-thead">
@@ -74,7 +74,7 @@
     </div>
   </div>
     </el-tab-pane>
-    <el-tab-pane label="待收货0" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="待收货 0" name="second">配置管理</el-tab-pane>
     <el-tab-pane label="待评价晒单 0" name="third">角色管理</el-tab-pane>
     <el-tab-pane label="常购清单" name="fourth">定时任务补偿</el-tab-pane>
     </el-tabs>

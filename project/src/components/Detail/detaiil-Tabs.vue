@@ -348,6 +348,7 @@ export default {
     height: 3px;
   }
 }
+
 // 吸顶
 .onfixed {
   position: fixed;
