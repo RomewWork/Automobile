@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div style="width=1200px">
+  <div class="nSearchWarp">
+    <div >
       <div id="filter-box" :class="{'onfixed' : isFixed}">
         <div class="filter-top clearfix">
           <ul class="filter-order-box">
@@ -217,6 +217,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.nSearchWarp {
+  clear: both;
+  width: 1200px;
+  margin: 0 auto;
+  font-size: 12px;
+  color: #5e5e5e;
+  font-family: Microsoft YaHei;
+}
 .block {
   padding-left: 600px;
 }

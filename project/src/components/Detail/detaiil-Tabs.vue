@@ -314,7 +314,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 // el-tabs 样式穿透修改
 #tabbox {
   font: 12px/1.5 arial, Microsoft YaHei;
