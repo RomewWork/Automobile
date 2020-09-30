@@ -1,6 +1,5 @@
 <template>
   <div class="nSearchWarp">
-    <Top />
     <Lists />
     <Footer />
     <Right />
@@ -8,14 +7,12 @@
 </template>
 
 <script>
-import Top from "../components/Top";
 import Lists from "../components/List/Lists";
 import Footer from "../components/Footer";
 import Right from "../components/Right";
 
 export default {
   components: {
-    Top,
     Lists,
     Footer,
     Right,
