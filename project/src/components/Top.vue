@@ -1,9 +1,5 @@
 <template>
-<<<<<<< HEAD
-    <div>
-=======
-    <div style="margin-bottom: 10px;">
->>>>>>> 90c1dc3abe68b2fa205d7e4d4d0ed342d0cb39ee
+    <div >
     <div class="gome-top">
         <div id="gome-top-body" class="wbox">
             <ul>
