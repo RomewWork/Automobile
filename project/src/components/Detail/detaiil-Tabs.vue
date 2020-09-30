@@ -355,7 +355,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" >
 // el-tabs 样式穿透修改
 #tabbox {
   overflow: hidden;

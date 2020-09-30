@@ -1,5 +1,6 @@
 <template>
   <div class="nSearchWarp">
+    <Top />
     <Lists />
     <Footer />
     <Right />
@@ -10,9 +11,11 @@
 import Lists from "../components/List/Lists";
 import Footer from "../components/Footer";
 import Right from "../components/Right";
+import Top from "../components/Top";
 export default {
   components: {
     Lists,
+    Top,
     Footer,
     Right,
   },
@@ -22,8 +25,8 @@ export default {
 <style lang="scss">
 .nSearchWarp {
   clear: both;
-  width: 1200px;
-  margin: 0 auto;
+  // width: 1200px;
+  // margin: 0 auto;
   font-size: 12px;
   color: #5e5e5e;
   font-family: Microsoft YaHei;

@@ -1,0 +1,25 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1600849058837'); /* IE9 */
+  src: url('iconfont.eot?t=1600849058837#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAAPAAAsAAAAAB+AAAANzAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqDSIMWATYCJAMMCwgABCAFhG0HNxvdBhFVlO1kPw6c81Owsl71IxJzLSihRcq+Bw+ff713sM8fRPVjabYK7E5QJ1U5qbcBAgjWbm3asY2KUCzJefBdlpn8M8OF0HG+TlepCtkK1/85ZrxI24Dyr20uUcldOtob4HhAA4qOS+E7kAPye4RX3UA28bEZAvDIVkk0b9m+Ow4au5cAxPgxo4bgFCzojlyBg8BqmKgRawjhyKXyEbA6+n3xm6ockIQU9ladR7YYTuNvmd9qKRMx9FcGM58LEKeBAiqBBjGw0dMblYQrKTxdo7tTLTQCOZcvEiGSGDprp/94EoSFnR0AUIpqeVNSjw8B32qJUcv9TwML8IE1wGXEJBY5qMy4wI1xBse6oUHLNiWLt297vX7dgw0bco2FePOm56tX3TEbEsdIzbZtTrn7ttrmzQc3JtYs2/3Mi+zdL2udfp6141nPZZfM5eVXw1eGemTR6CP85RuRZkPfW69y975u4asp3qZNQoU3+/683/PqVU//7tuCfW9aehOiDx0Tdvh4SczBo1jmyNDlx8PHlh0xR+d5gY55nepedDw569SexdIRBsKkseNcjL/gunLE9iUzJBOyh8gRrnvRLHSd87EnzbmBXStKfoQWpCa1njqktddrxLWHQdTDa1AcFTysPJJRvWY1bFBd96rZXowYLzpD4Yhx7UVN96Lb3WNv2G1vh27Z2U325pZnN65pLro9asUk8jjRxTW+JLeTGB3TjchCg/+kbEj5MzgqSK4W0yy7WU41b6nYf0nC3y8wGIDIEfVa9UCTUf+J7D/8G/a0/VRnUEz9/ztfA/BxbdE+1iViNMr4wHlDr8A/JiWWaUNuW9U0iSexYspUu+9DhCJJy/+UDxDvN16XRCaB0CVlINmyQHEUIjSmEkJ81cHiaASeCvF0XwKxJOYC5V4AQqw3SNGughLrg9CYL4Qk+4MltiV4epawoK+46tBMMFMsIX9CVXBPrl0Pce4RzdRmkpdHlCvKWPnAd7xyLMYeZY4h480EqgQk3EEE22HbMgzCNRbqWNUhdF1qeiOn4G520IxAGYVKIPcEKgXWo6C6OlR+/ggZk1ZGOkrqgldIjKr6gc/hERCxpieV3Ms1oxsjoBQBRLAOiMCFWifMwNDcroYKymFHBAchl1UiqsZZX9d9vjWAx15RJYUSGn2kaTPN8lRXsxkA') format('woff2'),
+  url('iconfont.woff?t=1600849058837') format('woff'),
+  url('iconfont.ttf?t=1600849058837') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1600849058837#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-kefu:before {
+  content: "\e61c";
+}
+
+.icon-shouji:before {
+  content: "\e637";
+}
+
