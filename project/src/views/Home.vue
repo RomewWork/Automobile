@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <!-- <Top /> -->
+    <Top />
     <HomeBanner />
     <HomeItem />
     <Footer />
@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// import Header from "../components/Header";
 import Top from "../components/Top";
 import HomeBanner from "../components/Home/HomeBanner";
 import HomeItem from "../components/Home/HomeItem";
@@ -18,7 +17,6 @@ import Right from "../components/Right";
 export default {
   name: "Home",
   components: {
-    // Header,
     Top,
     HomeBanner,
     HomeItem,

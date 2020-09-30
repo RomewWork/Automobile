@@ -12,7 +12,7 @@
                 @click="conIndex1 = index"
                 :class="{ cur: conIndex1 == index }"
               >
-                <div @click="go(item.text)">
+                <div>
                   <span>{{ item.text }}</span>
                   <i></i>
                 </div>
@@ -85,7 +85,7 @@
                 @click="conIndex2 = index"
                 :class="{ cur: conIndex2 == index }"
               >
-                <div @click="go(item.text)">
+                <div>
                   <span>{{ item.text }}</span>
                   <i></i>
                 </div>
@@ -158,7 +158,7 @@
                 @click="conIndex3 = index"
                 :class="{ cur: conIndex3 == index }"
               >
-                <div @click="go(item.text)">
+                <div>
                   <span>{{ item.text }}</span>
                   <i></i>
                 </div>
@@ -231,7 +231,7 @@
                 @click="conIndex4 = index"
                 :class="{ cur: conIndex4 == index }"
               >
-                <div @click="go(item.text)">
+                <div>
                   <span>{{ item.text }}</span>
                   <i></i>
                 </div>
@@ -304,7 +304,7 @@
                 @click="conIndex5 = index"
                 :class="{ cur: conIndex5 == index }"
               >
-                <div @click="go(item.text)">
+                <div>
                   <span>{{ item.text }}</span>
                   <i></i>
                 </div>
@@ -402,15 +402,6 @@ export default {
     );
   },
   methods: {
-    go(text) {
-      let { href } = this.$router.resolve({
-        path: "/list",
-        query: {
-          text,
-        },
-      });
-      window.open(href, "_blank");
-    },
     goto(gid) {
       let { href } = this.$router.resolve({
         path: "/detail",

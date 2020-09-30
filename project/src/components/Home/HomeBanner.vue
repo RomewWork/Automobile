@@ -45,5 +45,14 @@ export default {
     height: 5px;
     background: pink;
   }
+
+  .el-carousel__item.is-active {
+    z-index: 0;
+  }
+
+  .el-carousel__indicators {
+    
+    z-index: 0;
+  }
 }
 </style>

@@ -1,318 +1,5 @@
-<<<<<<< HEAD
 <template>
     <div>
-    <div class="gome-top">
-        <div id="gome-top-body" class="wbox">
-            <ul>
-                <li id="gome-entry-link">
-                    <a>
-                        <i class="icon-gome-logo"></i>
-                        国美首页
-                    </a>
-                </li>
-                <li class="gome-spacer"></li>
-                <li id="gome-user">
-									<b>
-										<a>国美会员</a>
-										<i></i>
-									</b>
-								</li>
-                <li id="loginDiv-link" class="gome-link">
-									<a>登录</a>
-									<a class="gome-link-register">
-										注册有礼
-										<i></i>
-									</a>
-								</li>
-            </ul>
-            <ul id="gome-top-right">
-							<li class="gome-link">
-								<a>我的订单</a>
-							</li>
-							<li id="gome-mygome">
-								<b>
-									<a>我的国美</a>
-									<i></i>
-								</b>
-							</li>
-							<li class="gome-spacer"></li>
-							<li id="gome-enterprise">
-								<b>
-									<a>企业采购</a>
-									<i></i>
-								</b>
-								<div class="public-dropdown">
-									<a class="gome-qrcode"></a>
-								</div>
-							</li>
-							<li id="gome-service">
-								<b>
-									<em class="gm-icon iconfont icon-kefu"></em>
-									<a>服务中心</a>
-									<i></i>
-									<i class="iconfont icon-kefu"></i>
-								</b>
-							</li>
-							<li id="gome-sitemap">
-								<b>
-									<a>网站导航</a>
-									<i></i>
-								</b>
-							</li>
-							<li class="gome-spacer"></li>
-							<li id="gome-phone">
-								<b>
-                  <em class="iconfont icon-shouji"></em>
-									<a>手机国美</a>
-									<i></i>
-								</b>
-							</li>
-						</ul>
-        </div>
-    </div>
-    <div id="gome-head" class="wbox">
-      <div id="logo">
-        <a>国美</a>
-      </div>
-    </div>
-    </div>
-</template>
-
-<script>
-export default {};
-</script>
-
-<style lang="scss" scoped>
-// top部
-.gome-top {
-  position: relative;
-  border-bottom: 1px solid #f3f3f3;
-  background: #f8f8f8;
-  height: 30px;
-  color: #5e5e5e;
-  z-index: 999;
-  a {
-    color: #888;
-  }
-  a:hover {
-    color: #f5004b;
-    text-decoration: none;
-  }
-  li:hover b i {
-    background-position: -55px -433px;
-  }
-  .gome-top li:hover .public-dropdown {
-    height: auto;
-    padding: 10px;
-    border: 1px solid #e6e6e6;
-  }
-  li {
-    float: left;
-    position: relative;
-    font: 400 12px/30px Arial, "Microsoft YaHei";
-  }
-  li#gome-enterprise:hover .public-dropdown {
-    padding: 15px;
-    font-size: 0;
-    height: 200px;
-  }
-
-  li.gome-spacer {
-    width: 1px;
-    height: 11px;
-    margin: 10px 0 0;
-    padding: 0;
-    background: #e6e6e6;
-    overflow: hidden;
-  }
-  b {
-    _float: left;
-    font-weight: 400;
-    display: block;
-    padding: 0 20px 0 10px;
-    border: 1px solid #f8f8f8;
-    border-bottom: 0;
-    height: 30px;
-    overflow: hidden;
-    position: relative;
-    z-index: 9;
-    color: #888;
-    i {
-      position: absolute;
-      top: 12px;
-      right: 8px;
-      background-position: -62px -433px;
-      width: 7px;
-      height: 4px;
-      overflow: hidden;
-    }
-  }
-  em {
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    width: 18px;
-    height: 18px;
-    margin-right: 6px;
-  }
-  .public-dropdown {
-    position: absolute;
-    top: 30px;
-    width: 320px;
-    background: #fff;
-    height: 0;
-    left: 0;
-    overflow: hidden;
-  }
-}
-#gome-top-body {
-  position: relative;
-  background: #f8f8f8;
-  height: 30px;
-  border-bottom: 1px solid #f3f3f3;
-}
-#gome-entry-link a:hover,
-#gome-plus-entry-link a:hover {
-  color: #f5004b;
-}
-#gome-entry-link,
-#gome-plus-entry-link {
-  font-family: Arial, "Microsoft YaHei";
-  margin: 0 10px;
-  height: 30px;
-  overflow: hidden;
-}
-#gome-entry-link a,
-#gome-plus-entry-link a {
-  color: #5e5e5e;
-  line-height: 32px;
-}
-#gome-entry-link i,
-#gome-plus-entry-link i {
-  width: 13px;
-  height: 12px;
-  margin-right: 5px;
-  display: inline-block;
-}
-#gome-entry-link i.icon-gome-logo {
-  background-position: -17px -1362px;
-  margin-top: -4px;
-}
-.gome-top i,
-.gome-top em {
-  background: url(../assets/ui.png);
-  display: inline-block;
-  vertical-align: middle;
-}
-.gome-top em {
-  position: absolute;
-  top: 5px;
-  left: 10px;
-  width: 18px;
-  height: 18px;
-  margin-right: 6px;
-}
-#gome-user {
-  margin-right: 12px;
-  b {
-    color: #5e5e5e;
-  }
-}
-.gome-link {
-  line-height: 33px;
-  height: 30px;
-  overflow: hidden;
-  margin: 0;
-  a {
-    margin-right: 10px;
-    line-height: 32px;
-  }
-  a.gome-link-register i {
-    display: inline-block;
-    width: 12px;
-    height: 13px;
-    background-position: -145px -1496px;
-    margin-left: 5px;
-    margin-top: -4px;
-    background-repeat: no-repeat;
-  }
-}
-.gome-link a.gome-link-register {
-  color: #f5004b;
-}
-
-#gome-top-right {
-  float: right;
-}
-
-#gome-enterprise .public-dropdown {
-  width: 200px;
-  padding: 0;
-  a.gome-qrcode {
-    background-position: 0 -1511px;
-  }
-  a {
-    display: inline-block;
-    height: 200px;
-    width: 200px;
-    background: url(../assets/ui.png);
-  }
-}
-#gome-phone .public-dropdown,
-#gome-enterprise .public-dropdown {
-  padding: 0;
-  left: auto;
-  right: 0;
-  width: auto;
-}
-#gome-phone b,
-#gome-service b {
-  padding-left: 29px;
-}
-#gome-service b .gm-icon {
-  font-size: 17px;
-  color: #dd00a7;
-  background: 0 0;
-  line-height: 30px;
-  height: 30px;
-  top: 0;
-}
-#gome-phone {
-  position: static;
-}
-#gome-phone b em {
-  font-size: 17px;
-  color: #dd00a7;
-  background: 0 0;
-  line-height: 30px;
-  height: 30px;
-  top: 0;
-}
-
-// gome-head
-
-#gome-head {
-    position: relative;
-    height: 120px;
-    vertical-align: middle;
-    z-index: 980;
-}
-#logo {
-    float: left;
-    margin: 32px 10px 0 0;
-    a {
-    display: block;
-    width: 125px;
-    height: 56px;
-    background: url(../assets/logo.png) 0 0 no-repeat;
-    text-indent: -99px;
-    overflow: hidden;
-}
-}
-</style>
-=======
-<template>
-    <div style="margin-bottom: 10px;">
     <div class="gome-top">
         <div id="gome-top-body" class="wbox">
             <ul>
@@ -401,7 +88,7 @@ export default {};
               </div>
             </div>
             <label id="keyLabel" style="display: block;">华为手机</label>
-            <input type="text" autocomplete="off" onpropertychange="if(this.value.length>200){this.value=this.value.slice(0,199)}">
+            <input type="text">
             <button type="button" class="search-btn">搜索</button>
           </form>
           <a>
@@ -441,59 +128,41 @@ export default {};
     <div class="category-box">
       <div class="category wbox">
         <div class="sidecategory">
-          <h2 class="">
+          <h2 class="hh">
             <span></span>
-            <a href="">全部商品分类</a>
-          </h2>
-          <div id="navBox" class="lisnav" style="display: block;">
-            <div class="lisbg" style="display: block;">
+            <a>全部商品分类</a>
+            <div id="navBox" class="lisnav">
+            <div class="lisbg">
             </div>
             <ul class="lisnav-ul" id="lisnav">
               <li class="first edit-mode nav-item bgw" v-for="(item,index) in list1" :key="index">
                 <h3>
-                  <a href="" target="_blank">{{item.title[0]}}</a>
-                  <a href="" target="_blank">{{item.title[1]}}</a>
+                  <a>{{item.title}}</a>
                 </h3>
-              </li>
-            </ul>
-            <div class="subnav" id="subnav" style="display: block;">
-              <div class="loading1-sync" id="loading1-sync" style="top: 0px;">
+
+                <div class="subnav" id="subnav" >
+                <div class="loading1-sync" id="loading1-sync" >
                 <div class="fullcategory" style="display: block;">
                   <div class="fullcategory-left">
-                    <div class="fullcategory-content-box" id="fullcategory-content-box" style="width: 769px;">
-                      <div class="fullcategory-content" style="width: 769px;">
-                        <ul class="fullcategory-list" style="width: 769px;">
-                           <div class="title" style="margin-top: -8px;_margin: -8px 0; box-sizing: content-box;"> 手机通讯 </div>
-                           <div class="list" style="width: 700px;">
-                             <div></div>
-                            <a class="hot" title="手机">手机</a>
-                            <a class="hot" title="手机">iPhone</a>
-                            <a class="hot" title="手机">华为</a>
-                            <a class="hot" title="手机">小米</a>
-                            <a class="hot" title="手机">荣耀</a>
-                           </div>
-                        </ul>
-                      </div>
-                      <div class="fullcategory-content" style="width: 769px;">
-                        <ul class="fullcategory-list" style="width: 769px;">
-                           <div class="title" style="box-sizing: content-box;"> 手机通讯 </div>
-                           <div class="list" style="width: 700px;">
-                             <div class="underline"></div>
-                            <a class="hot" title="手机">手机</a>
-                            <a class="hot" title="手机">iPhone</a>
-                            <a class="hot" title="手机">华为</a>
-                            <a class="hot" title="手机">小米</a>
-                            <a class="hot" title="手机">荣耀</a>
+                    <div class="fullcategory-content-box" id="fullcategory-content-box" >
+                      <div class="fullcategory-content" >
+                        <ul class="fullcategory-list" >
+                           <div class="list" >
+                            <a class="hot" :title="ele" v-for="(ele,index) in item.list" :key="index" @click="go(ele)">{{ele}}</a>
                            </div>
                         </ul>
                       </div>
                     </div>
                   </div>
-                  <div class="fullcategory-right"></div>
                 </div>
               </div>
             </div>
+              </li>
+            </ul>
+            
           </div>
+          </h2>
+          
         </div>
         <ul class="mainnav" >
           <li v-for="(item,index) in list" :key="index">
@@ -525,16 +194,54 @@ export default {
       ],
       list1: [
         {
-          title: ["手机", "充值"]
+          title: "车载电器",
+          list:['安全座椅','车载生活电','电源','行车记录仪','净化器','蓝牙设备','冷暖箱','吸尘器']
+        },
+         {
+          title: "养护配件",
+          list:['改装配件','轮胎']
+        },
+         {
+          title: "美容清洁",
+          list:['玻璃水','车蜡','清洁剂','洗车机','洗车配件']
+        },
+         {
+          title: "车饰精品",
+          list:['功能精品','挂失摆件','颈枕腰靠','凉垫','内饰精品','四季垫','香水']
+        },
+         {
+          title: "安全自驾",
+          list:['安全座椅','打气泵','防盗设备','紧急救援','自驾装备']
         }
       ]
     };
+  },
+  methods:{
+     go(text) {
+      let { href } = this.$router.resolve({
+        path: "/list",
+        query: {
+          text,
+        },
+      });
+      window.open(href, "_blank");
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
 // top部
+.hh:hover .lisnav{
+  display: block;
+}
+.bgw:hover {
+  background: #fff;
+}
+.bgw:hover .subnav{
+  display: block;
+}
+
 .gome-top {
   position: relative;
   border-bottom: 1px solid #f3f3f3;
@@ -1006,8 +713,7 @@ export default {
     height: 38px;
     background: #f1f1f1;
     float: left;
-    opacity: 0.9;
-    filter: Alpha(opacity=90);
+    cursor: pointer;
     span {
       float: right;
       display: block;
@@ -1026,61 +732,53 @@ export default {
       padding-left: 15px;
       float: left;
     }
-  }
-  .lisnav {
+
+     .lisnav {
     width: 200px;
-    height: 450px;
+    height: 195px;
     position: absolute;
-    top: 39px;
+    top: 38px;
     left: 0;
-    _left: -200px;
     z-index: 9999;
     display: none;
     .lisbg {
       opacity: 0.7;
       filter: Alpha(opacity=70);
       width: 200px;
-      height: 450px;
+      height: 195px;
       color: #333;
       background: #333;
       position: absolute;
       top: 0;
       left: 0;
       z-index: 1000;
-      display: none;
-    }
-    li.first {
-      margin-top: 1px;
     }
     h3 {
       position: relative;
-      padding-left: 15px;
-      height: 30px;
-      line-height: 30px;
-      width: 170px;
+      height: 39px;
+      line-height: 39px;
+      width: 100%;
+      height: 100%;
       white-space: nowrap;
       overflow: hidden;
-      margin-left: 1px;
       a {
         color: #fff;
         font-size: 14px;
+        text-align: center;
         font-family: "Microsoft YaHei", arial;
         font-weight: 200;
-        display: inline-block;
-        *margin-right: 0;
-        margin-right: 3px;
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
       }
     }
     li.bgw {
-      background: #fbfbfb;
-      margin-left: 1px;
-      _margin-left: 0;
-      *margin-left: 0;
       width: 200px;
-      _width: 202px;
-      h3 a {
-        color: #333;
-      }
+      border-left: 1px solid #818181;
+    }
+    .bgw:hover h3 a{
+    color: #000;
     }
   }
   .lisnav-ul {
@@ -1089,52 +787,37 @@ export default {
   }
   .subnav {
     background-color: #fff;
-    min-height: 448px;
-    _height: 448px;
-    max-height: 515px;
-    border-left: none;
     position: absolute;
     top: 0;
     left: 199px;
     z-index: 99;
-    width: 1000px;
+    width:779px;
+    height: 195px;
     display: none;
   }
+  }
+ 
 }
 .sidecategory .lisnav li.lst,
 .sidecategory .lisnav li.first {
-  height: 29px;
-  line-height: 29px;
+  height: 39px;
+  line-height: 39px;
   overflow: hidden;
 }
 .fullcategory {
   display: none;
   background-color: #fff;
-  min-height: 448px;
-  max-height: 525px;
-  width: 998px;
-  *width: 999px;
-  _height: 525px;
+  height: 195px;
+  width: 778px;
 }
 .fullcategory-left {
   overflow: hidden;
   background: #fbfbfb;
-  min-height: 448px;
-  max-height: 525px;
+  height: 195px;
   opacity: 1;
   filter: Alpha(opacity=100);
   float: left;
-  width: 788px;
-  _height: 525px;
-}
-.fullcategory-right {
-  width: 210px;
-  min-height: 448px;
-  max-height: 515px;
-  background: #fff;
-  float: left;
-  position: relative;
-  _height: 515px;
+  width: 778px;
 }
 .fullcategory-title {
   height: 20px;
@@ -1142,41 +825,32 @@ export default {
   overflow: hidden;
 }
 .fullcategory-content-box {
-  max-height: 468px;
-  _height: 448px;
+  height: 195px;
   width: 364px;
   margin: 6px 0 10px 20px;
-  _margin: 6px 0 10px 19px;
   overflow: hidden;
   float: left;
-  _width: 355px;
 }
 .fullcategory-content {
   width: 362px;
   overflow: hidden;
-  *padding-bottom: 5px;
-  _width: 354px;
 }
 .fullcategory-list {
   width: 363px;
   margin: 11px 30px 0 -8px;
-  _margin: 11px 30px 0 -8px;
-  _width: 354px;
   .list {
     width: 294px;
     margin-top: -14px;
-    _margin: 14px;
     padding-top: 5px;
     a {
       color: #5e5e5e;
       font-size: 12px;
       font-family: Arial, "Microsoft YaHei";
       float: left;
-      padding: 0 7px;
+      padding: 0;
       height: 14px;
       line-height: 14px;
-      margin: 7px 0;
-      border-left: 1px solid #e0e0e0;
+      margin: 7px 20px 17px 10px;
       white-space: nowrap;
       display: inline-block;
     }
@@ -1196,8 +870,6 @@ export default {
   color: #5e5e5e;
   height: 22px;
   line-height: 22px;
-  _padding-left: 8px;
-  _margin: 2px 0;
 }
 .fullcategory-list div {
   float: left;
@@ -1209,19 +881,16 @@ export default {
 .loading1-sync {
   z-index: 1000;
   border: 1px solid #818181;
-  min-height: 448px;
-  max-height: 525px;
-  width: 998px;
-  *width: 999px;
+  border-left: none;
+  width: 779px;
+  height: 195px;
   position: absolute;
   left: 0;
   background: #fff;
-  _height: 525px;
 }
 .mainnav {
   float: left;
   height: 38px;
-  // width: 800px;
   overflow: hidden;
   position: relative;
   li {
@@ -1272,5 +941,6 @@ export default {
     height: 2px;
     overflow: hidden;
 }
+
+
 </style>
->>>>>>> 285bf8c4a9a3ec4d60712430aed1365244519d6d
