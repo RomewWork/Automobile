@@ -8,14 +8,15 @@
 </template>
 
 <script>
+import Top from "../components/Top";
 import Lists from "../components/List/Lists";
 import Footer from "../components/Footer";
 import Right from "../components/Right";
-import Top from "../components/Top";
+
 export default {
   components: {
-    Lists,
     Top,
+    Lists,
     Footer,
     Right,
   },
