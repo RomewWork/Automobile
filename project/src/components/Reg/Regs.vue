@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="content-bg" style="background:#fff1e8">
+    <div class="content-bg" style="background: #fff1e8">
       <div
         class="main clearfix"
-        style="background-image:url(//gfs10.gomein.net.cn/T1ruLjBvd_1RCvBVdK.jpg);"
+        style="
+          background-image: url(//gfs10.gomein.net.cn/T1ruLjBvd_1RCvBVdK.jpg);
+        "
       >
         <div class="login-box-wrap">
           <h2>用户注册</h2>
@@ -34,10 +36,21 @@
                 <a
                   @click="open"
                   class="wji"
-                  style="color: #000;font-size: 13px;cursor: pointer;float: right;"
+                  style="
+                    color: #000;
+                    font-size: 13px;
+                    cursor: pointer;
+                    float: right;
+                  "
                   title="已有账号？去登陆！"
-                >已有账号？去登陆！</a>
-                <input type="button" value="注 册" class="btnnuw" @click="reg" />
+                  >已有账号？去登陆！</a
+                >
+                <input
+                  type="button"
+                  value="注 册"
+                  class="btnnuw"
+                  @click="reg"
+                />
               </div>
             </div>
           </div>
@@ -62,9 +75,6 @@ export default {
       // 做出pc端有点小刷新，跳转的感觉
       let { href } = this.$router.resolve({
         path: "/login",
-        // query: {
-        //   text: "listdata",
-        // },
       });
       window.open(href, "_self");
       location.reload();
@@ -155,11 +165,9 @@ export default {
 
                     this.$confirm("注册成功，是否马上登陆", {
                       confirmButtonText: "确定",
-                      cancelButtonText: "取消",
+                      showCancelButton: false,
                       closeOnClickModal: false,
                     }).then(() => {
-                      // this.$router.push("/login");
-
                       // 做出pc端有点小刷新，跳转的感觉
                       let { href } = this.$router.resolve({
                         path: "/login",

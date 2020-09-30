@@ -1,23 +1,27 @@
 <template>
   <div>
     <div style="width=1200px">
-      <div id="filter-box" :class="{'onfixed' : isFixed}">
+      <div id="filter-box" :class="{ onfixed: isFixed }">
         <div class="filter-top clearfix">
           <ul class="filter-order-box">
             <li
-              v-for="(item,index) in atabList "
+              v-for="(item, index) in atabList"
               :key="index"
-              :class="{'cur':currentSort==index}"
+              :class="{ cur: currentSort == index }"
               @click="addcur(index)"
             >
               <a>
                 {{ item.title }}
                 <i
                   class="el-icon-top"
-                  style="color:white;"
+                  style="color: white"
                   v-show="item.bool == true"
                 ></i>
-                <i class="el-icon-bottom" style="color:white;" v-show="item.bool == false"></i>
+                <i
+                  class="el-icon-bottom"
+                  style="color: white"
+                  v-show="item.bool == false"
+                ></i>
               </a>
             </li>
           </ul>
@@ -35,7 +39,11 @@
     </div>
     <div class="product-box">
       <ul class="product-lists clearfix">
-        <li class="product-item" v-for="(item,index) in list.list" :key="index">
+        <li
+          class="product-item"
+          v-for="(item, index) in list.list"
+          :key="index"
+        >
           <div class="item-tab">
             <p class="item-pic">
               <a @click="go(item.gid)">
@@ -45,16 +53,19 @@
             <div>
               <p class="item-price">
                 <span class="price">¥</span>
-                <span class="price">{{item.price}}</span>
+                <span class="price">{{ item.price }}</span>
               </p>
             </div>
             <p class="item-name">
-              <a @click="go(item.gid)">卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)</a>
+              <a @click="go(item.gid)"
+                >卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用
+                大号 33CM(红色 一个装)</a
+              >
             </p>
             <p class="item-comment-dispatching">
               <a class="comment">
                 <span>已有</span>
-                {{item.evaluate}}
+                {{ item.evaluate }}
                 <span>人评价</span>
               </a>
             </p>
@@ -63,10 +74,18 @@
               <span class="add-contrast" title="对比">
                 <i class="icon"></i>
               </span>
-              <span class="add-collection" title="收藏">
+              <span
+                class="add-collection"
+                title="收藏"
+                @click="colItem(item.gid)"
+              >
                 <i class="icon"></i>
               </span>
-              <a class="add-cart addTo-cart" title="加入购物车">
+              <a
+                class="add-cart addTo-cart"
+                title="加入购物车"
+                @click="addCart(item.gid)"
+              >
                 <i class="icon"></i>
               </a>
               <span class="online-server" title="在线客服">
@@ -96,6 +115,7 @@ export default {
       index1Num: 0,
       index2Num: 0,
       index3Num: 0,
+      shopNum: 1,
       atabList: [
         {
           title: "综合",
@@ -207,6 +227,84 @@ export default {
         this.atabList[this.currentSort].meet,
         this.atabList[this.currentSort].bool
       );
+    },
+    addCart(gid) {
+      let token = localStorage.getItem("user");
+      if (token) {
+        this.$post("goods/cartgood", {
+          gid,
+          shopNum: this.shopNum,
+          token,
+        }).then((res) => {
+          if (res == "加入购物车成功！！！") {
+            this.$confirm(`数量 ：${this.shopNum}`, res, {
+              confirmButtonText: "确定",
+              showCancelButton: false,
+              closeOnClickModal: false,
+            });
+          } else {
+            this.$confirm(
+              "请查看您的购物车哦，加入购物车的商品数量不能大于该商品的库存！",
+              res,
+              {
+                confirmButtonText: "确定",
+                showCancelButton: false,
+                closeOnClickModal: false,
+              }
+            );
+          }
+        });
+      } else {
+        this.$confirm(
+          "是否马上登录？",
+          "您还没有登录哦，登录之后才能加入购物车",
+          {
+            confirmButtonText: "确定",
+            closeOnClickModal: false,
+          }
+        ).then(() => {
+          let { href } = this.$router.resolve({
+            path: "/login",
+          });
+
+          window.open(href, "_self");
+        });
+      }
+    },
+    colItem(gid) {
+      let token = localStorage.getItem("user");
+
+      this.$confirm("您确定要将该商品加入收藏夹吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        closeOnClickModal: false,
+        lockScroll: false,
+        type: "warning",
+      })
+        .then(() => {
+          this.$post("goods/coldata", {
+            gid,
+            token,
+          }).then((res) => {
+            if (res == "成功加入收藏夹！！！") {
+              this.$message({
+                type: "success",
+                message: res,
+              });
+            } else {
+              this.$message({
+                type: "info",
+                message: res,
+              });
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已经取消收藏",
+          });
+        });
     },
   },
   //回调中移除监听
@@ -320,6 +418,11 @@ export default {
     height: 210px;
     text-align: center;
     position: relative;
+
+    img {
+      width: 220px;
+      height: 210px;
+    }
   }
 
   .item-price {

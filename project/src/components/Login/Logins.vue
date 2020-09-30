@@ -1,9 +1,11 @@
 <template>
   <div>
-    <div class="content-bg" style="background:#fff1e8">
+    <div class="content-bg" style="background: #fff1e8">
       <div
         class="main clearfix"
-        style="background-image:url(//gfs10.gomein.net.cn/T1ruLjBvd_1RCvBVdK.jpg);"
+        style="
+          background-image: url(//gfs10.gomein.net.cn/T1ruLjBvd_1RCvBVdK.jpg);
+        "
       >
         <div class="login-box-wrap">
           <h2>用户登录</h2>
@@ -30,15 +32,33 @@
                 </div>
                 <a
                   class="wji"
-                  style="color: #000;font-size: 13px;cursor: pointer;float: left;"
+                  style="
+                    color: #000;
+                    font-size: 13px;
+                    cursor: pointer;
+                    float: left;
+                  "
                   title="修改密码"
-                >修改密码</a>
+                  >修改密码</a
+                >
                 <a
                   class="wji"
-                  style="color: #000;font-size: 13px;cursor: pointer;float: right;"
+                  style="
+                    color: #000;
+                    font-size: 13px;
+                    cursor: pointer;
+                    float: right;
+                  "
                   title="没有注册？立即去注册"
-                >没有注册？立即去注册</a>
-                <input type="button" value="登 录" class="btnnuw" @click="login()" />
+                  @click="open"
+                  >没有注册？立即去注册</a
+                >
+                <input
+                  type="button"
+                  value="登 录"
+                  class="btnnuw"
+                  @click="login()"
+                />
               </div>
             </div>
           </div>
@@ -57,6 +77,14 @@ export default {
     };
   },
   methods: {
+    open() {
+      // 做出pc端有点小刷新，跳转的感觉
+      let { href } = this.$router.resolve({
+        path: "/reg",
+      });
+      window.open(href, "_self");
+      location.reload();
+    },
     login() {
       let token = localStorage.getItem("user");
       let obj = {
@@ -66,6 +94,7 @@ export default {
       if (token) {
         this.$confirm("你已经登陆过了，欢迎来到汽车用品商城", {
           confirmButtonText: "确定",
+          showCancelButton: false,
           closeOnClickModal: false,
         }).then(() => {
           // 做出pc端有点小刷新，跳转的感觉

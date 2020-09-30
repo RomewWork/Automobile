@@ -2,18 +2,18 @@
   <div>
     <div class="wbox lazy-fn-wrap">
       <div class="wbox floor floor-current">
-        <h2 class="car_title">{{list[0].title}}</h2>
+        <h2 class="car_title">{{ list[0].title }}</h2>
         <div class="floor_main">
           <div class="main_tab">
             <ul>
               <li
-                v-for="(item,index) in list[0].tab"
+                v-for="(item, index) in list[0].tab"
                 :key="item.id"
                 @click="conIndex1 = index"
-                :class="{cur : conIndex1 == index}"
+                :class="{ cur: conIndex1 == index }"
               >
                 <div @click="go(item.text)">
-                  <span>{{item.text}}</span>
+                  <span>{{ item.text }}</span>
                   <i></i>
                 </div>
               </li>
@@ -45,12 +45,12 @@
               </div>
               <div
                 class="floor_goods"
-                v-for="(iteme,indexs) in list[0].list"
+                v-for="(iteme, indexs) in list[0].list"
                 :key="indexs"
                 v-show="conIndex1 == indexs"
               >
                 <ul>
-                  <li v-for="(ele,index) in iteme" :key="index">
+                  <li v-for="(ele, index) in iteme" :key="index">
                     <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
@@ -59,10 +59,10 @@
                         width="160"
                         height="160"
                       />
-                      <p class="img_name">{{ele.title}}</p>
+                      <p class="img_name">{{ ele.title }}</p>
                       <div class="hot_price">
                         <span>¥</span>
-                        <i class="minPrice">{{ele.price}}</i>
+                        <i class="minPrice">{{ ele.price }}</i>
                       </div>
                     </a>
                   </li>
@@ -75,18 +75,18 @@
     </div>
     <div class="wbox lazy-fn-wrap">
       <div class="wbox floor floor-current">
-        <h2 class="car_title">{{list[1].title}}</h2>
+        <h2 class="car_title">{{ list[1].title }}</h2>
         <div class="floor_main">
           <div class="main_tab">
             <ul>
               <li
-                v-for="(item,index) in list[1].tab"
+                v-for="(item, index) in list[1].tab"
                 :key="item.id"
                 @click="conIndex2 = index"
-                :class="{cur : conIndex2 == index}"
+                :class="{ cur: conIndex2 == index }"
               >
                 <div @click="go(item.text)">
-                  <span>{{item.text}}</span>
+                  <span>{{ item.text }}</span>
                   <i></i>
                 </div>
               </li>
@@ -118,12 +118,12 @@
               </div>
               <div
                 class="floor_goods"
-                v-for="(iteme,indexs) in list[1].list"
+                v-for="(iteme, indexs) in list[1].list"
                 :key="indexs"
                 v-show="conIndex2 == indexs"
               >
                 <ul>
-                  <li v-for="(ele,index) in iteme" :key="index">
+                  <li v-for="(ele, index) in iteme" :key="index">
                     <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
@@ -132,10 +132,10 @@
                         width="160"
                         height="160"
                       />
-                      <p class="img_name">{{ele.title}}</p>
+                      <p class="img_name">{{ ele.title }}</p>
                       <div class="hot_price">
                         <span>¥</span>
-                        <i class="minPrice">{{ele.price}}</i>
+                        <i class="minPrice">{{ ele.price }}</i>
                       </div>
                     </a>
                   </li>
@@ -148,18 +148,18 @@
     </div>
     <div class="wbox lazy-fn-wrap">
       <div class="wbox floor floor-current">
-        <h2 class="car_title">{{list[2].title}}</h2>
+        <h2 class="car_title">{{ list[2].title }}</h2>
         <div class="floor_main">
           <div class="main_tab">
             <ul>
               <li
-                v-for="(item,index) in list[2].tab"
+                v-for="(item, index) in list[2].tab"
                 :key="item.id"
                 @click="conIndex3 = index"
-                :class="{cur : conIndex3 == index}"
+                :class="{ cur: conIndex3 == index }"
               >
                 <div @click="go(item.text)">
-                  <span>{{item.text}}</span>
+                  <span>{{ item.text }}</span>
                   <i></i>
                 </div>
               </li>
@@ -191,12 +191,12 @@
               </div>
               <div
                 class="floor_goods"
-                v-for="(iteme,indexs) in list[2].list"
+                v-for="(iteme, indexs) in list[2].list"
                 :key="indexs"
                 v-show="conIndex3 == indexs"
               >
                 <ul>
-                  <li v-for="(ele,index) in iteme" :key="index">
+                  <li v-for="(ele, index) in iteme" :key="index">
                     <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
@@ -205,10 +205,10 @@
                         width="160"
                         height="160"
                       />
-                      <p class="img_name">{{ele.title}}</p>
+                      <p class="img_name">{{ ele.title }}</p>
                       <div class="hot_price">
                         <span>¥</span>
-                        <i class="minPrice">{{ele.price}}</i>
+                        <i class="minPrice">{{ ele.price }}</i>
                       </div>
                     </a>
                   </li>
@@ -221,18 +221,18 @@
     </div>
     <div class="wbox lazy-fn-wrap">
       <div class="wbox floor floor-current">
-        <h2 class="car_title">{{list[3].title}}</h2>
+        <h2 class="car_title">{{ list[3].title }}</h2>
         <div class="floor_main">
           <div class="main_tab">
             <ul>
               <li
-                v-for="(item,index) in list[3].tab"
+                v-for="(item, index) in list[3].tab"
                 :key="item.id"
                 @click="conIndex4 = index"
-                :class="{cur : conIndex4 == index}"
+                :class="{ cur: conIndex4 == index }"
               >
                 <div @click="go(item.text)">
-                  <span>{{item.text}}</span>
+                  <span>{{ item.text }}</span>
                   <i></i>
                 </div>
               </li>
@@ -264,12 +264,12 @@
               </div>
               <div
                 class="floor_goods"
-                v-for="(iteme,indexs) in list[3].list"
+                v-for="(iteme, indexs) in list[3].list"
                 :key="indexs"
                 v-show="conIndex4 == indexs"
               >
                 <ul>
-                  <li v-for="(ele,index) in iteme" :key="index">
+                  <li v-for="(ele, index) in iteme" :key="index">
                     <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
@@ -278,10 +278,10 @@
                         width="160"
                         height="160"
                       />
-                      <p class="img_name">{{ele.title}}</p>
+                      <p class="img_name">{{ ele.title }}</p>
                       <div class="hot_price">
                         <span>¥</span>
-                        <i class="minPrice">{{ele.price}}</i>
+                        <i class="minPrice">{{ ele.price }}</i>
                       </div>
                     </a>
                   </li>
@@ -294,18 +294,18 @@
     </div>
     <div class="wbox lazy-fn-wrap">
       <div class="wbox floor floor-current">
-        <h2 class="car_title">{{list[4].title}}</h2>
+        <h2 class="car_title">{{ list[4].title }}</h2>
         <div class="floor_main">
           <div class="main_tab">
             <ul>
               <li
-                v-for="(item,index) in list[4].tab"
+                v-for="(item, index) in list[4].tab"
                 :key="item.id"
                 @click="conIndex5 = index"
-                :class="{cur : conIndex5 == index}"
+                :class="{ cur: conIndex5 == index }"
               >
                 <div @click="go(item.text)">
-                  <span>{{item.text}}</span>
+                  <span>{{ item.text }}</span>
                   <i></i>
                 </div>
               </li>
@@ -337,12 +337,12 @@
               </div>
               <div
                 class="floor_goods"
-                v-for="(iteme,indexs) in list[4].list"
+                v-for="(iteme, indexs) in list[4].list"
                 :key="indexs"
                 v-show="conIndex5 == indexs"
               >
                 <ul>
-                  <li v-for="(ele,index) in iteme" :key="index">
+                  <li v-for="(ele, index) in iteme" :key="index">
                     <a :title="ele.title" @click="goto(ele.gid)">
                       <img
                         class="lazyloading"
@@ -351,10 +351,10 @@
                         width="160"
                         height="160"
                       />
-                      <p class="img_name">{{ele.title}}</p>
+                      <p class="img_name">{{ ele.title }}</p>
                       <div class="hot_price">
                         <span>¥</span>
-                        <i class="minPrice">{{ele.price}}</i>
+                        <i class="minPrice">{{ ele.price }}</i>
                       </div>
                     </a>
                   </li>
@@ -372,7 +372,23 @@
 export default {
   data() {
     return {
-      list: [],
+      list: [
+        {
+          title: "",
+        },
+        {
+          title: "",
+        },
+        {
+          title: "",
+        },
+        {
+          title: "",
+        },
+        {
+          title: "",
+        },
+      ],
       conIndex1: 0,
       conIndex2: 0,
       conIndex3: 0,
@@ -382,7 +398,7 @@ export default {
   },
   created() {
     this.$post("goods/goodHome").then((res) =>
-      res.forEach((item) => this.list.push(item))
+      res.forEach((item) => (this.list = res))
     );
   },
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <div id="block">
-    <el-carousel height="400px" id="carousel" style="background: rgb(238, 249, 255);">
+    <el-carousel height="400px" id="carousel" style="background: pink;">
       <el-carousel-item v-for="item in  list" :key="item">
         <img :src="item" alt />
       </el-carousel-item>
@@ -34,7 +34,7 @@ export default {
   }
   .el-carousel__arrow--right {
     right: 42px;
-}
+  }
 
   .el-carousel__arrow {
     width: 50px;

@@ -1,10 +1,10 @@
 <template>
-<div class="box">
-  <detaiilProduct/>
-  <detaiil-tabs/>
-  <Footer />
-  <Right />
-</div>
+  <div class="box">
+    <detaiilProduct />
+    <detaiil-tabs />
+    <Footer />
+    <Right />
+  </div>
 </template>
 
 <script>
@@ -17,8 +17,8 @@ export default {
     detaiilProduct,
     detaiilTabs,
     Footer,
-    Right
-  }
+    Right,
+  },
 };
 </script>
 
@@ -27,6 +27,5 @@ export default {
   width: 1200px;
   margin: 0 auto;
   color: #5e5e5e;
-  // font: 12px/12px arial, Microsoft YaHei;
 }
 </style>

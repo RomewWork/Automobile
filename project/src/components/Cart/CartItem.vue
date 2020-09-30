@@ -4,11 +4,11 @@
       <div class="cart-main-header clearfix">
         <div class="cart-col-1 pr">
           <div class="c-i checkbox_chose">
-            <input type="checkbox" />
+            <input type="checkbox" :checked="checkedAll" @click="setBoolAll" />
           </div>
         </div>
         <div class="cart-col-2">全选</div>
-        <div style="width:350px;" class="cart-col-3">商品信息</div>
+        <div style="width: 350px" class="cart-col-3">商品信息</div>
         <div class="cart-col-4">
           <div class="cart-good-real-price">单价</div>
         </div>
@@ -21,29 +21,33 @@
     </div>
     <div class="container">
       <div>
-        <div class="cart-shop-goods">
+        <div class="cart-shop-goods" v-show="cartList.length">
           <div
             class="cart-shop-good clearfix cart-shop-good-common cart-shop-good-checked cart-item-last"
+            v-for="item in cartList"
+            :key="item.cartId"
           >
             <div class="cart-col-1 border-top">
               <div class="c-i checkbox_chose">
-                <input type="checkbox" />
+                <input
+                  type="checkbox"
+                  :checked="item.bool"
+                  @click="setBool(item.bool, item.cartId)"
+                />
               </div>
             </div>
-            <div class="cart-col-2" style="height: 120px;">
-              <a href="//item.gome.com.cn/9140149489-1130661811.html" target="_blank" class="g-img">
-                <img src="//gfs17.gomein.net.cn/T1wuWvBvh_1RCvBVdK_80.jpg" alt />
+            <div class="cart-col-2">
+              <a @click="go(item.gid)" class="g-img">
+                <img :src="item.imgUrl" />
               </a>
             </div>
             <div class>
               <div class="clearfix">
                 <div class="cart-col-3">
                   <div class="cart-good-name">
-                    <a
-                      href="//item.gome.com.cn/9140149489-1130661811.html"
-                      target="_blank"
-                      title="佳能（Canon) 迷你入门级照相机单反相机200D II/200D2代 EF-S18-55mm f/4-5.6 IS STM"
-                    >佳能（Canon) 迷你入门级照相机单反相机200D II/200D2代 EF-S18-55mm f/4...</a>
+                    <a :title="item.title" @click="go(item.gid)">{{
+                      item.title
+                    }}</a>
                   </div>
                 </div>
                 <div class="cart-col-8">
@@ -51,27 +55,37 @@
                     <div class="cart-saleprops-text">
                       <div class="cart-salesPro-item">
                         <span class="cart-good-key" title="颜色">颜色</span>
-                        <span class="cart-good-value" title="白色">：XXX</span>
+                        <span class="cart-good-value" title="白色"
+                          >：芭比粉</span
+                        >
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="cart-col-4 cart-price-height47">
-                  <div class="cart-good-real-price">¥&nbsp;4299.00</div>
+                  <div class="cart-good-real-price">
+                    ¥&nbsp;{{ item.price }}
+                  </div>
                   <div class="red"></div>
                 </div>
                 <div class="cart-col-5">
-                  <el-input-number size="mini" v-model="num"></el-input-number>
+                  <el-input-number
+                    size="mini"
+                    v-model="item.num"
+                    :min="1"
+                    :max="item.stock"
+                    @change="handleChange($event, item.cartId)"
+                  ></el-input-number>
                 </div>
                 <div class="cart-col-6">
-                  <div class="cart-good-amount">¥&nbsp;21495.00</div>
+                  <div class="cart-good-amount">¥&nbsp;{{ item.total }}</div>
                 </div>
                 <div class="cart-col-7">
                   <div class="cart-good-fun delfixed">
-                    <a href="javascript:;">删除</a>
+                    <a @click="romoveItem(item.cartId)">删除</a>
                   </div>
                   <div class="cart-good-fun">
-                    <a href="javascript:">移入收藏夹</a>
+                    <a @click="colItem(item.gid)">加入收藏夹</a>
                   </div>
                 </div>
               </div>
@@ -79,7 +93,7 @@
           </div>
         </div>
 
-        <div class="cart-empty-wrap">
+        <div class="cart-empty-wrap" v-show="!cartList.length">
           <div class="icons c-i cart-empty">
             <img
               src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3220010791,792927654&fm=26&gp=0.jpg"
@@ -87,7 +101,7 @@
           </div>
           <div class="cart-empty-text">
             您的购物车是空的，快去
-            <a href="//www.gome.com.cn">
+            <a @click="open">
               &nbsp;&nbsp;挑选商品
               <span class="cartjt">&gt;</span>
             </a>
@@ -96,34 +110,49 @@
       </div>
     </div>
 
-    <div class="cart-bottom-wrap">
+    <div class="cart-bottom-wrap" v-show="cartList.length">
       <div class="cart-bottom-info">
-        <div class="container" style="position:relative">
+        <div class="container" style="position: relative; width: 990px">
           <div class="cart-col-1 pr">
             <div class="c-i checkbox_chose">
-              <input type="checkbox" />
+              <input
+                type="checkbox"
+                :checked="checkedAll"
+                @click="setBoolAll"
+              />
             </div>
           </div>
           <div class="cart-col-2">
             全选
-            <a href="javascript:" class="black del-goods" style="margin-left:20px;">删除</a>
+            <a
+              class="black del-goods"
+              style="margin-left: 20px"
+              @click="romoveAll"
+              >删除选中</a
+            >
           </div>
           <div class="cart-col-3 mlf14"></div>
           <div class="cart-col-4 cart-totle-price pl84">
             <div j class="cart-bottom-selectgood">
               已选
-              <span class="cart-price-red selected-price">5</span> 件商品
+              <span class="cart-price-red selected-price">{{ shopNum }}</span>
+              件商品
               <em class="c-i arrow-top"></em>
             </div>
             <div class="bottom-total-pirce">
               <dl>
                 <dt>总计（不含运费）：</dt>
-                <dd class="cart-price-red ffyh" style="font-size:18px;font-weight:900;">￥21495.00</dd>
+                <dd
+                  class="cart-price-red ffyh"
+                  style="font-size: 18px; font-weight: 900"
+                >
+                  ￥{{ totalPrice }}
+                </dd>
               </dl>
             </div>
           </div>
           <div class="cart-col-5">
-            <a href="javascript:" class="order-btn">
+            <a class="order-btn">
               <span class="btn-normal">去结算 ></span>
             </a>
           </div>
@@ -137,8 +166,183 @@
 export default {
   data() {
     return {
-      num: 1,
+      goNum: 1,
+      num: 0,
+      token: localStorage.getItem("user"),
+      cartList: [],
+      checkedAll: 0,
+      totalPrice: 0,
+      shopNum: 0,
     };
+  },
+  created() {
+    this.getData();
+  },
+  methods: {
+    open() {
+      // 做出pc端有点小刷新，跳转的感觉
+      let { href } = this.$router.resolve({
+        path: "/home",
+      });
+      window.open(href, "_self");
+      location.reload();
+    },
+    getData() {
+      let total = 0;
+      let shop = 0;
+      let num = 0;
+
+      this.$post("goods/cartdata", {
+        token: this.token,
+      }).then((res) => {
+        this.cartList = res;
+
+        this.cartList.forEach((item) => {
+          if (item.bool == 1) {
+            total += item.total;
+            shop += item.num;
+            this.totalPrice = total;
+            this.shopNum = shop;
+            num++;
+
+            if (num == this.cartList.length) {
+              this.checkedAll = 1;
+            } else {
+              this.checkedAll = 0;
+            }
+          } else {
+            this.totalPrice = total;
+            this.shopNum = shop;
+            this.checkedAll = 0;
+          }
+        });
+      });
+    },
+    handleChange(num, cartId) {
+      if (num == undefined) num = 1;
+
+      this.$post("goods/putcartshopdata", {
+        cartId,
+        num,
+      }).then(() => this.getData());
+    },
+    setBool(bool, cartId) {
+      this.$post("goods/cartbool", {
+        cartId,
+        bool: Number(!bool),
+      }).then(() => this.getData());
+    },
+    setBoolAll() {
+      this.$post("goods/cartboolall", {
+        token: this.token,
+        bool: Number(!this.checkedAll),
+      }).then(() => this.getData());
+    },
+    romoveItem(cartId) {
+      this.$confirm("确定要移除该商品吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        closeOnClickModal: false,
+        lockScroll: false,
+        type: "warning",
+      })
+        .then(() => {
+          this.$post("goods/delcartshopdata", {
+            cartId,
+          }).then(() => this.getData());
+
+          this.$message({
+            type: "success",
+            message: "已经成功移除!",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已经取消移除",
+          });
+        });
+    },
+    romoveAll() {
+      let num = 0;
+
+      this.cartList.forEach((item) => {
+        if (item.bool == 1) num++;
+      });
+
+      if (num != 0) {
+        this.$confirm("确定要移除选中的商品吗？", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          closeOnClickModal: false,
+          lockScroll: false,
+          type: "warning",
+        })
+          .then(() => {
+            this.$post("goods/delalldata", { token: this.token }).then(() =>
+              this.getData()
+            );
+
+            this.$message({
+              type: "success",
+              message: "已经成功移除!",
+            });
+          })
+          .catch(() => {
+            this.$message({
+              type: "info",
+              message: "已经取消移除",
+            });
+          });
+      } else {
+        this.$message({
+          type: "info",
+          message: "您未选中商品哦",
+        });
+      }
+    },
+    colItem(gid) {
+      this.$confirm("您确定要将该商品加入收藏夹吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        closeOnClickModal: false,
+        lockScroll: false,
+        type: "warning",
+      })
+        .then(() => {
+          this.$post("goods/coldata", {
+            gid,
+            token: this.token,
+          }).then((res) => {
+            if (res == "成功加入收藏夹！！！") {
+              this.$message({
+                type: "success",
+                message: res,
+              });
+            } else {
+              this.$message({
+                type: "info",
+                message: res,
+              });
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已经取消收藏",
+          });
+        });
+    },
+    go(gid) {
+      let { href } = this.$router.resolve({
+        path: "/detail",
+        query: {
+          gid,
+        },
+      });
+      window.open(href, "_blank");
+    },
   },
 };
 </script>
@@ -182,7 +386,8 @@ export default {
     height: 44px;
     line-height: 44px;
     background: #eee;
-    width: 988px;
+    width: 990px;
+    margin: auto;
     border: 1px solid #e6e6e6;
     border-radius: 3px;
 
@@ -237,13 +442,15 @@ export default {
   }
 
   .cart-shop-goods {
+    width: 990px;
+    margin: auto;
     margin-top: 10px;
     border: 1px solid #e6e6e6;
-    height: 120px;
 
     .cart-shop-good-checked {
       background: #fffaf4;
       height: 120px;
+      border-bottom: 1px solid #ddd;
 
       .cart-col-1 {
         width: 40px;
@@ -261,8 +468,8 @@ export default {
           display: block;
 
           img {
-            width: 80px;
-            height: 80px;
+            width: 78px;
+            height: 78px;
             position: relative;
             overflow: hidden;
           }
@@ -319,7 +526,7 @@ export default {
         .cart-good-amount {
           position: relative;
           font-size: 13px;
-          text-align: right;
+          margin-left: 45px;
           padding-right: 43px;
           white-space: nowrap;
         }
@@ -330,7 +537,7 @@ export default {
         margin-top: 20px;
 
         .cart-good-fun {
-          margin-bottom: 2px;
+          margin-bottom: 5px;
           padding-top: 1px;
         }
       }
@@ -338,6 +545,8 @@ export default {
   }
 
   .cart-empty-wrap {
+    width: 990px;
+    margin: auto;
     border: 1px solid #e6e6e6;
     text-align: center;
     padding: 56px 0;
@@ -445,7 +654,7 @@ export default {
 
         .cart-col-5 {
           width: 136px;
-          margin-left: 15px;
+          float: right;
 
           a {
             background: #e3101e;

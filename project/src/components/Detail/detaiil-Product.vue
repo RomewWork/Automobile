@@ -1,33 +1,43 @@
 <template>
   <div class="container clearfix">
-    <div class="prd-left fl"></div>
+    <div class="prd-left fl">
+      <vue-photo-zoom-pro
+        :url="list[0].imgUrl"
+        :scale="2.5"
+        :out-zoomer="true"
+        :out-zoomer-style="{ 'z-index': '999' }"
+      ></vue-photo-zoom-pro>
+    </div>
     <div class="prd-right fl">
       <div class="hgroup">
-        <h1>卡饰得(CARCHAD) 车用长嘴狗炭包 卡通竹炭狗 除异味竹炭包 车家两用 大号 33CM(红色 一个装)</h1>
+        <h1>{{ list[0].title }}</h1>
         <h4></h4>
         <div class="contrasts">
-          <label class="btn-contrasts">对比</label>
+          <label class="btn-contrasts" @click="colItem(list[0].gid)"
+            >收藏</label
+          >
         </div>
       </div>
       <div class="prd-price-1">
         <div class="prd-price-other clearfix">
-          <label class="prd-price-left">国  美  价</label>
+          <label class="prd-price-left">国 美 价</label>
           <div class="unitprice prd-price-right">
             <span class="price">
               <em>¥</em>
-              12
+              {{ list[0].price }}
             </span>
             <a class="reduce">降价通知</a>
           </div>
           <div class="prd-price-flr">
             <div class="prd-price-line">|</div>
             <div class="prd-price-lineright fl">
-              <p>好评度
+              <p>
+                好评度
                 <em>100%</em>
               </p>
               <p class="pincnt">
                 <a class="reduce">
-                  <em>12</em>
+                  <em>{{ list[0].evaluate }}</em>
                   人评价
                 </a>
               </p>
@@ -38,7 +48,7 @@
       <div class="prd-properties">
         <div class="properties-1">
           <div class="prd-properties-other m20 tese">
-            <label class="prd-properties-left line20">特　　色</label>
+            <label class="prd-properties-left line20">特 色</label>
             <div class="prd-properties-right">
               <span class="guanjia">
                 <em></em>
@@ -48,18 +58,21 @@
             </div>
           </div>
           <div class="prd-properties-other shangpin">
-            <label class="prd-properties-left">商　　品</label>
-            <div class="prd-properties-right" style="position:relative">
+            <label class="prd-properties-left">商 品</label>
+            <div class="prd-properties-right" style="position: relative">
               <span class="hasstock">有货</span>
-              <span class="zhichi">支持
+              <span class="zhichi">
+                支持
                 <a>运费说明</a>
               </span>
             </div>
           </div>
           <div class="prd-properties-other fuwu">
-            <label class="prd-properties-left">服　　务</label>
+            <label class="prd-properties-left">服 务</label>
             <div class="prd-properties-right">
-              <span>由<a>车饰界汽车用品专营店</a>发货并负责售后服务。
+              <span>
+                由
+                <a>车饰界汽车用品专营店</a>发货并负责售后服务。
               </span>
             </div>
           </div>
@@ -67,22 +80,24 @@
         <div class="properties-2">
           <div class="m16">
             <div class="prd-properties-other yanse">
-              <label class="prdLeft" style="white-space:pre-wrap;">颜　　色</label>
+              <label class="prdLeft" style="white-space: pre-wrap">颜 色</label>
               <div class="prdRight">
                 <div class="prdcol prd-img-item">
                   <a class="select">
-                    <img src="https://gfs17.gomein.net.cn/T1JiEjBvAT1RCvBVdK_60.jpg">
-                    <span>黑色</span>
+                    <img :src="list[0].imgUrl" />
+                    <span>颜色</span>
                     <i></i>
                   </a>
                 </div>
+                <div class="stock">库存 : {{ list[0].stock }}</div>
               </div>
             </div>
             <div class="prd-properties-other banben">
-              <label class="prdLeft" style="white-space:pre-wrap;">版　　本</label>
+              <label class="prdLeft" style="white-space: pre-wrap">版 本</label>
               <div class="prdRight">
                 <div class="prdmod">
-                  <a class="select">通用
+                  <a class="select">
+                    通用
                     <i></i>
                   </a>
                 </div>
@@ -92,34 +107,155 @@
         </div>
       </div>
       <div class="prd-buttons">
-          <div class="count-wrapper">
-            <input type="text" class="quantity j-gACval" maxlength="5" value="1" onfocus="this.className='j-gACval quantity focus'" onblur="this.className='quantity j-gACval'" autocomplete="off">
-            <a href="javascript:;" class="plus j-gACbtnA">+</a>
-            <a href="javascript:;" class="minus j-gACbtn disab">-</a>
-          </div>
-          <a class="btn-product btn-addcart">加入购物车</a>
-          <a class="btn-product mobtn">
-            <i class="mobtnma"></i>
-            手机下单
-          </a>
+        <div class="count-wrapper">
+          <el-input-number
+            v-model="num"
+            :min="1"
+            :max="list[0].stock"
+            @blur="handleChange($event)"
+          ></el-input-number>
+        </div>
+        <a class="btn-product btn-addcart" @click="addCart">加入购物车</a>
+        <a class="btn-product mobtn">
+          <i class="mobtnma"></i>
+          手机下单
+        </a>
       </div>
-       <div class="prd-tips clearfix">
+      <div class="prd-tips clearfix">
         <p>温馨提示</p>
         <ol>
-          <li> 
-                不支持7天无理由退货;
-          </li>
+          <li>不支持7天无理由退货;</li>
         </ol>
       </div>
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
-export default {};
+import Vue from "vue";
+import VuePhotoZoomPro from "vue-photo-zoom-pro";
+Vue.use(VuePhotoZoomPro);
+export default {
+  data() {
+    return {
+      list: [
+        {
+          classification: "",
+          evaluate: "",
+          gid: "",
+          imgUrl: "",
+          price: "",
+          salesVolume: "",
+          stock: 0,
+          time: "",
+          title: "",
+        },
+      ],
+      num: 1,
+      msg: "",
+    };
+  },
+  created() {
+    this.$post("goods/getgood", { gid: this.$route.query.gid }).then((res) => {
+      res.forEach((item) => (this.list = res));
+    });
+  },
+  methods: {
+    handleChange(val) {
+      if (this.num == undefined) this.num = 1;
+    },
+    addCart() {
+      let token = localStorage.getItem("user");
+      if (token) {
+        console.log(6666);
+        this.$post("goods/cartgood", {
+          gid: this.$route.query.gid,
+          shopNum: this.num,
+          token,
+        }).then((res) => {
+          console.log(res);
+          if (res == "加入购物车成功！！！") {
+            this.$confirm(`数量 ：${this.num}`, res, {
+              confirmButtonText: "确定",
+              showCancelButton: false,
+              closeOnClickModal: false,
+            });
+          } else {
+            this.$confirm(
+              "请查看您的购物车哦，加入购物车的商品数量不能大于该商品的库存！",
+              res,
+              {
+                confirmButtonText: "确定",
+                showCancelButton: false,
+                closeOnClickModal: false,
+              }
+            );
+          }
+        });
+      } else {
+        this.$confirm(
+          "是否马上登录？",
+          "您还没有登录哦，登录之后才能加入购物车",
+          {
+            confirmButtonText: "确定",
+            closeOnClickModal: false,
+          }
+        ).then(() => {
+          let { href } = this.$router.resolve({
+            path: "/login",
+          });
+
+          window.open(href, "_self");
+        });
+      }
+    },
+    colItem(gid) {
+      this.$confirm("您确定要将该商品加入收藏夹吗？", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        closeOnClickModal: false,
+        lockScroll: false,
+        type: "warning",
+      })
+        .then(() => {
+          this.$post("goods/coldata", {
+            gid,
+            token: localStorage.getItem("user"),
+          }).then((res) => {
+            if (res == "成功加入收藏夹！！！") {
+              this.$message({
+                type: "success",
+                message: res,
+              });
+            } else {
+              this.$message({
+                type: "info",
+                message: res,
+              });
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已经取消收藏",
+          });
+        });
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
+.stock {
+  float: left;
+  margin-top: 11px;
+  margin-left: 20px;
+}
+.prd-left {
+  width: 360px;
+  height: 360px;
+}
 .prd-right {
   width: 620px;
   margin: 0 0 0 30px;
@@ -435,9 +571,8 @@ export default {};
   .count-wrapper {
     position: relative;
     float: left;
-    width: 46px;
+    width: 180px;
     height: 38px;
-    border: 1px solid #ccc;
     margin-right: 10px;
     box-sizing: content-box;
     a {
@@ -516,7 +651,7 @@ export default {};
     float: left;
     list-style: decimal;
     padding-left: 10px;
-        line-height: 20px;
+    line-height: 20px;
   }
 }
 .prd-buttons .btn-product.btn-addcart,

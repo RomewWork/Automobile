@@ -2,20 +2,25 @@
   <div
     class="ibar"
     id="iBar"
-    style="z-index: 9990; right: 0px; position: fixed; top: 0px; display: block; height: 100%;"
+    style="
+      z-index: 9990;
+      right: 0px;
+      position: fixed;
+      top: 0px;
+      display: block;
+      height: 100%;
+    "
   >
-    <div class="ibar_main_panel" style="left: 0px;">
+    <div class="ibar_main_panel" style="left: 0px">
       <ul class="ibar_mp_center">
         <li class="mpbtn_login">
-          <a>
-            <s></s>去登录
-          </a>
+          <a> <s></s>去登录 </a>
         </li>
         <li class="mpbtn_cart">
-          <a data-plugin="iBarCart" class="cartbtn">
+          <a data-plugin="iBarCart" class="cartbtn" @click="goto1">
             <s></s>
             <span class="text">购物车</span>
-            <span class="cart_num">1</span>
+            <span class="cart_num">?</span>
           </a>
         </li>
         <li class="mpbtn_favorite">
@@ -28,9 +33,7 @@
           </div>
         </li>
         <li class="mpbtn_histroy">
-          <a data-plugin="iBarHistroy">
-            <s></s>我的收藏
-          </a>
+          <a data-plugin="iBarHistroy" @click="goto2"> <s></s>我的收藏 </a>
           <div class="mp_tooltip">
             我的收藏
             <s class="icon_arrow_right_black"></s>
@@ -39,29 +42,27 @@
       </ul>
       <ul class="ibar_mp_bottom">
         <li class="mpbtn_qrcode">
-          <a>
-            <s></s>手机聚美
-          </a>
+          <a> <s></s>手机聚美 </a>
           <div class="mp_qrcode">
-            <img src="http://p0.jmstatic.com/assets/qrcode.png?v=2" width="148" height="175" />
+            <img
+              src="http://p0.jmstatic.com/assets/qrcode.png?v=2"
+              width="148"
+              height="175"
+            />
             <s class="icon_arrow_white"></s>
           </div>
         </li>
         <li class="mpbtn_support">
-          <a data-plugin="iBarFaq">
-            <s></s>客服中心
-          </a>
+          <a data-plugin="iBarFaq"> <s></s>客服中心 </a>
           <div class="mp_tooltip">
             客服中心
             <s class="icon_arrow_right_black"></s>
           </div>
         </li>
         <li class="mpbtn_gotop" id="gotop">
-          <el-backtop style="right: 0px; bottom: 0px;" class="btn_gotop">
-            <a class="btn_gotop">
-              <s></s>返回顶部
-            </a>
-            <div class="mp_tooltip" style="font-size:12px;">
+          <el-backtop style="right: 0px; bottom: 0px" class="btn_gotop">
+            <a class="btn_gotop"> <s></s>返回顶部 </a>
+            <div class="mp_tooltip" style="font-size: 12px">
               返回顶部
               <s class="icon_arrow_right_black"></s>
             </div>
@@ -69,7 +70,10 @@
         </li>
       </ul>
     </div>
-    <div class="ibar_login_box status_login" style="top: 204.5px; display: none;">
+    <div
+      class="ibar_login_box status_login"
+      style="top: 204.5px; display: none"
+    >
       <div class="avatar_box">
         <p class="avatar_imgbox">
           <img src alt="头像" width="62" height="62" />
@@ -93,14 +97,19 @@
         <div class="ibar_plugin_title">
           <span class="ibar_plugin_name">
             购物车
-            <span class="ibar_cart_timer" style="display: inline;">已超时，请尽快结算</span>
+            <span class="ibar_cart_timer" style="display: inline"
+              >已超时，请尽快结算</span
+            >
           </span>
         </div>
         <div class="ibar_plugin_content">
-          <div class="ibar_cart_group_container" style="position: relative;"></div>
+          <div
+            class="ibar_cart_group_container"
+            style="position: relative"
+          ></div>
           <div
             class="ibar_cart_handler ibar_cart_handler_attached"
-            style="display: block; top: auto;"
+            style="display: block; top: auto"
           >
             <div class="ibar_cart_handler_header clearfix">
               <span class="ibar_cart_handler_header_left">
@@ -113,7 +122,8 @@
               class="ibar_cart_go_btn"
               href="http://cart.jumei.com/i/cart/show?from=ibar_cart_button"
               target="_blank"
-            >去购物车结算</a>
+              >去购物车结算</a
+            >
           </div>
         </div>
       </div>
@@ -123,7 +133,22 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    goto1() {
+      let { href } = this.$router.resolve({
+        path: "/cart",
+      });
+      window.open(href, "_blank");
+    },
+    goto2() {
+      let { href } = this.$router.resolve({
+        path: "/collection",
+      });
+      window.open(href, "_blank");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
